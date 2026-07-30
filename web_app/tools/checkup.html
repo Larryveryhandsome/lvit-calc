@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>不動產稅務健檢（Beta）｜賣地・換屋・繼承 90 天待辦與優惠檢核｜留白事務所</title>
+<meta name="description" content="免費不動產稅務健檢：選擇賣地、換屋或繼承情境，回答幾個問題，立即產出你的法定優惠檢核清單與 90 天待辦時間軸，可直接列印保存。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/tools/checkup.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css?v=28" />
+<link rel="stylesheet" href="../articles/articles.css?v=28" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="不動產稅務健檢（Beta）｜免費產出你的 90 天待辦" />
+<meta property="og:description" content="賣地、換屋、繼承——回答幾個問題，立即產出優惠檢核清單與待辦時間軸。" />
+<meta property="og:url" content="https://calc.zengzhisui.com/tools/checkup.html" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"不動產稅務健檢","url":"https://calc.zengzhisui.com/tools/checkup.html","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"publisher":{"@type":"Organization","name":"留白事務所有限公司"}}
+</script>
+<style>
+.scen { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0; }
+@media (max-width:560px){ .scen { grid-template-columns:1fr; } }
+.scen button { border:1.5px solid var(--border-strong); background:var(--surface); border-radius:var(--radius); padding:16px 10px; font-size:.95rem; font-weight:700; color:var(--ink); cursor:pointer; }
+.scen button.on { border-color:var(--brand); background:var(--brand-soft); color:var(--brand-ink); }
+.qbox { display:none; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:12px 0; }
+.qbox.show { display:grid; gap:12px; }
+.qbox label { font-size:.86rem; color:var(--ink); display:flex; gap:8px; align-items:flex-start; }
+.qbox .num label { display:block; font-size:.82rem; font-weight:700; color:var(--ink-soft); margin-bottom:4px; }
+.qbox input[type=number] { width:100%; height:40px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; }
+.qbox .go { height:46px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:700; font-size:1rem; cursor:pointer; }
+.report { display:none; border:1px solid var(--border-strong); border-radius:var(--radius); background:var(--surface); padding:20px; margin:16px 0; }
+.report h2 { border:none; margin:14px 0 8px; padding:0; font-size:1.05rem; }
+.report ul { padding-left:1.2em; } .report li { margin:.45rem 0; line-height:1.7; font-size:.9rem; }
+.report .ok::marker { content:"✅ "; } .report .warn::marker { content:"⚠️ "; } .report .info::marker { content:"▫️ "; }
+.rep-actions { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+.rep-actions button, .rep-actions a { flex:1; min-width:150px; height:44px; border-radius:var(--radius-sm); font-weight:700; display:flex; align-items:center; justify-content:center; text-decoration:none; cursor:pointer; }
+.rep-print { border:1.5px solid var(--brand); background:var(--surface); color:var(--brand); }
+.rep-calc { border:none; background:var(--brand); color:#fff; }
+@media print { .article-top, .scen, .qbox, .post-cta, .rep-actions { display:none !important; } .report { display:block !important; border:none; } }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">留白事務所｜土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">土增稅試算 →</a>
+</div>
+<article class="post">
+<h1>不動產稅務健檢（Beta）</h1>
+<div class="post-meta">免費 · 回答幾個問題 → 產出你的優惠檢核與 90 天待辦 · 可列印保存</div>
+<p>選擇你的情境：</p>
+
+<div class="scen">
+  <button type="button" data-s="sell">🏞️ 要賣地／賣房</button>
+  <button type="button" data-s="swap">🔄 換屋（賣舊買新）</button>
+  <button type="button" data-s="inherit">🕯️ 繼承／傳承</button>
+</div>
+
+<div class="qbox" id="q-sell">
+  <label><input type="checkbox" id="s-self" /> 本人、配偶或直系親屬<strong>設籍</strong>於該處，且出售前 1 年內無出租、營業</label>
+  <label><input type="checkbox" id="s-first" /> 我<strong>從沒用過</strong>「一生一次」自用住宅優惠稅率</label>
+  <div class="num"><label for="s-years">持有年數</label><input type="number" id="s-years" min="0" step="any" placeholder="例：25" /></div>
+  <label><input type="checkbox" id="s-farm" /> 這是<strong>農地</strong>且持續作農業使用</label>
+  <button class="go" type="button" data-go="sell">產出健檢報告</button>
+</div>
+
+<div class="qbox" id="q-swap">
+  <div class="num"><label for="w-months">賣舊屋與買新屋相隔幾個月？（先買後賣也算）</label><input type="number" id="w-months" min="0" step="any" placeholder="例：8" /></div>
+  <label><input type="checkbox" id="w-self" /> 新舊屋都是<strong>自用住宅</strong>（設籍、無出租營業）</label>
+  <label><input type="checkbox" id="w-bigger" /> 新屋的<strong>申報移轉現值</strong>高於舊屋（買貴於賣）</label>
+  <label><input type="checkbox" id="w-6y" /> 賣的舊屋已設籍並持有<strong>連續滿 6 年</strong></label>
+  <button class="go" type="button" data-go="swap">產出健檢報告</button>
+</div>
+
+<div class="qbox" id="q-inherit">
+  <div class="num"><label for="i-months">繼承發生（親人過世）至今幾個月？還沒發生填 0</label><input type="number" id="i-months" min="0" step="any" value="0" /></div>
+  <label><input type="checkbox" id="i-spouse" /> 被繼承人（或未來的被繼承人）<strong>有配偶</strong></label>
+  <label><input type="checkbox" id="i-debt" /> 遺產中可能有<strong>債務大於資產</strong>的疑慮</label>
+  <label><input type="checkbox" id="i-abroad" /> 有繼承人<strong>住在國外</strong>（含大陸地區）</label>
+  <label><input type="checkbox" id="i-farm" /> 遺產中有<strong>農地</strong></label>
+  <label><input type="checkbox" id="i-sell" /> 繼承後<strong>可能出售</strong>不動產</label>
+  <button class="go" type="button" data-go="inherit">產出健檢報告</button>
+</div>
+
+<div class="report" id="report"></div>
+</article>
+
+<div class="post-cta">
+  <h2>想要更完整的書面版？</h2>
+  <p>AI 稅務健檢報告完整版（含兩稅試算數字與逐項法條依據）即將上線——在<a href="https://calc.zengzhisui.com/">試算頁</a>登記搶先體驗。</p>
+  <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">加 LINE，接收上線通知</a>
+  <a class="btn-calc" href="https://calc.zengzhisui.com/">土增稅免費試算 →</a>
+</div>
+<p class="post-disclaimer">本健檢為一般性稅務資訊整理，依你勾選之情況列出「可能」適用之法定制度與期限提醒，非法律或稅務意見，亦非任何優惠適用之保證；實際以主管稽徵機關核定為準。留白事務所有限公司｜顧問服務業者，非地政士／會計師／記帳士／律師事務所；登記與申報由持照專業人員辦理。</p>
+</div>
+<script src="../line-config.js?v=28"></script>
+<script>
+const R = document.getElementById("report");
+const li = (cls, html) => `<li class="${cls}">${html}</li>`;
+const A = { calc: '<a href="https://calc.zengzhisui.com/">土增稅試算</a>', house: '<a href="./house-tax.html">房地合一試算</a>', refund: '<a href="./repurchase-refund.html">重購退稅試算</a>', estate: '<a href="./estate-tax.html">遺產稅試算</a>' };
+
+document.querySelectorAll(".scen button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll(".scen button").forEach((x) => x.classList.toggle("on", x === b));
+  document.querySelectorAll(".qbox").forEach((q) => q.classList.toggle("show", q.id === "q-" + b.dataset.s));
+  R.style.display = "none";
+}));
+
+const footer = `<div class="rep-actions"><button class="rep-print" onclick="window.print()">🖨️ 列印／存 PDF</button><a class="rep-calc" href="https://calc.zengzhisui.com/">把數字算出來 →</a></div>`;
+const head = (t) => `<h2 style="margin-top:0">📋 ${t}｜健檢結果（${new Date().toLocaleDateString("zh-TW")}）</h2>`;
+
+function render(html) { R.innerHTML = html + footer; R.style.display = "block"; R.scrollIntoView({ behavior: "smooth" }); }
+
+document.querySelector('[data-go="sell"]').addEventListener("click", () => {
+  const self = s_self.checked, first = s_first.checked, y = parseFloat(s_years.value) || 0, farm = s_farm.checked;
+  let items = "";
+  if (farm) items += li("ok", `農地作農業使用：移轉可申請<strong>不課徵土增稅</strong>（需農用證明；受讓人須續作農用）。詳<a href="../articles/farmland-inherit.html">農地稅務</a>`);
+  if (self && first) items += li("ok", `可能適用<strong>自用住宅一生一次 10% 稅率</strong>（vs 一般 20–40%）——用 ${A.calc} 看兩種稅率差多少`);
+  else if (self && !first) items += li("info", `一生一次已用過：確認是否符合<strong>一生一屋</strong>（設籍持有連續滿 6 年、面積較小之限制）`);
+  else items += li("warn", `未設籍或近 1 年有出租營業：自用 10% 稅率<strong>可能不適用</strong>，出售前的安排順序很關鍵`);
+  if (y >= 40) items += li("ok", `持有滿 40 年：一般稅率部分<strong>減徵 40%</strong>（自動適用）`);
+  else if (y >= 30) items += li("ok", `持有滿 30 年：一般稅率部分<strong>減徵 30%</strong>`);
+  else if (y >= 20) items += li("ok", `持有滿 20 年：一般稅率部分<strong>減徵 20%</strong>`);
+  items += li("info", `別忘了同時算<strong>房地合一稅</strong>（105 年後取得適用）：${A.house}；土地漲價總數額可自課稅所得減除`);
+  items += li("warn", `賣後 2 年內若重購自用住宅，記得申請<strong>重購退稅</strong>：${A.refund}——錯過期限無法補救`);
+  render(head("賣地／賣房") + `<ul>${items}</ul><h2>90 天待辦</h2><ul>` +
+    li("info", "第 1–2 週：調謄本、確認前次移轉現值與設籍狀態；用免費工具把兩種稅率都算出來") +
+    li("info", "第 3–4 週：決定申報方式與時點（公告現值每年 1/1 調整，跨年申報數字會變）") +
+    li("info", "簽約後：土增稅申報與登記由地政士辦理；房地合一於移轉登記次日起 30 日內申報（記帳士/會計師可協助）") + `</ul>`);
+});
+
+document.querySelector('[data-go="swap"]').addEventListener("click", () => {
+  const m = parseFloat(w_months.value) || 0, self = w_self.checked, bigger = w_bigger.checked, six = w_6y.checked;
+  let items = "";
+  if (m <= 24 && self) items += li("ok", `在 <strong>2 年期限內</strong>且符合自用：有機會申請<strong>土增稅重購退稅</strong>——${A.refund} 立即估可退多少`);
+  else if (m > 24) items += li("warn", `已超過 2 年：土增稅重購退稅<strong>原則上無法申請</strong>（期限以完成移轉登記日計）`);
+  else items += li("warn", `非自用（有出租/營業/未設籍）：重購退稅不適用，先確認設籍狀態`);
+  if (bigger) items += li("ok", `買貴於賣：退稅額有機會達<strong>已繳稅額全額</strong>`);
+  else items += li("info", `買便宜於賣：可能只退部分或無差額可退——先試算再決定`);
+  if (six) items += li("ok", `舊屋自住滿 6 年：房地合一可能適用 <strong>400 萬免稅＋10%</strong>：${A.house}`);
+  items += li("warn", `房地合一稅<strong>也有自己的重購退稅</strong>（換大全額退、換小按比例）——兩套制度分別申請，很多人只辦一邊`);
+  items += li("warn", `退稅後新屋 <strong>5 年內</strong>不得改作他用、出租或再移轉，否則追繳`);
+  render(head("換屋") + `<ul>${items}</ul><h2>90 天待辦</h2><ul>` +
+    li("info", "本週：把已繳土增稅單據、新舊屋權狀/現值資料找齊") +
+    li("info", "第 2–4 週：完成兩邊試算（土增稅重購退稅＋房地合一重購退稅），確認可退金額") +
+    li("info", "申請：由地政士/記帳士等持照專業人員向稽徵機關申請退稅") + `</ul>`);
+});
+
+document.querySelector('[data-go="inherit"]').addEventListener("click", () => {
+  const m = parseFloat(i_months.value) || 0, spouse = i_spouse.checked, debt = i_debt.checked, abroad = i_abroad.checked, farm = i_farm.checked, sell = i_sell.checked;
+  let items = "";
+  if (m > 0) {
+    if (debt && m <= 3) items += li("warn", `<strong>拋棄繼承只剩 ${Math.max(0, 3 - m).toFixed(1)} 個月</strong>（知悉起 3 個月內向法院書面辦理）——債務疑慮請最優先處理：<a href="../articles/renounce-inheritance.html">流程</a>`);
+    else if (debt) items += li("warn", `拋棄繼承 3 個月期限<strong>可能已過</strong>——盡速確認知悉時點，洽律師`);
+    if (m <= 6) items += li("warn", `<strong>遺產稅申報期限：死亡日起 6 個月</strong>（剩約 ${Math.max(0, 6 - m).toFixed(1)} 個月，可申請延 3 個月）；繼承登記同為 6 個月內。先用 ${A.estate} 估稅額`);
+    else items += li("warn", `已逾 6 個月：確認是否已申報/登記，未辦有罰鍰——盡速補辦`);
+  } else {
+    items += li("ok", `<strong>還沒發生＝最好的規劃時點。</strong>分年贈與（每人每年 244 萬免稅）需要時間發酵，且死亡前 2 年內贈與會併回課稅：<a href="../articles/gift-tax-244.html">怎麼規劃</a>、<a href="../articles/gift-vs-inherit.html">贈與 vs 繼承比較</a>`);
+  }
+  if (spouse) items += li("ok", `配偶健在：申報時可主張<strong>剩餘財產差額分配請求權</strong>（婚後財產差額半數自遺產扣除）——最常被忽略的合法大額扣除，${A.estate} 可一起試算`);
+  if (abroad) items += li("warn", `有海外繼承人：授權文件需<strong>駐外館處驗證</strong>；大陸籍繼承人有 <strong>3 年書面聲明繼承</strong>時效與 200 萬上限；海外身分出售適用 45%/35% 且無自住優惠——「誰出面賣」差很大。英文說明：<a href="../en/inherit-taiwan-property.html">EN Guide</a>`);
+  if (farm) items += li("ok", `遺產有農地：作農業使用可<strong>免徵遺產稅</strong>（列管 5 年須續農用）：<a href="../articles/farmland-inherit.html">條件與地雷</a>`);
+  if (sell) items += li("info", `繼承後出售：持有期間可<strong>併計被繼承人</strong>（45% 與 15% 的差距）；成本以繼承時現值認定：<a href="../articles/inherit-house-sell.html">說明</a>＋${A.house}`);
+  items += li("info", `繼承移轉<strong>不課土增稅</strong>，且公告現值基準重設——這會影響未來出售的稅，規劃時一起看`);
+  render(head("繼承／傳承") + `<ul>${items}</ul><h2>90 天待辦</h2><ul>` +
+    (m > 0
+      ? li("info", "第 1–2 週：除戶謄本、向國稅局調財產清單、確認全體繼承人與有無拋棄需求") +
+        li("info", "第 3–8 週：遺產稅申報（含差額分配請求權主張，由記帳士/會計師辦理）") +
+        li("info", "取得完稅/免稅證明後：6 個月內完成繼承登記（地政士辦理）；談不攏先辦公同共有保期限")
+      : li("info", "本月：盤點父母名下不動產與現值、確認設籍與使用狀態") +
+        li("info", "60 天內：家族對話（誰住、誰管、怎麼分），把「順序」想清楚——順序比省稅重要") +
+        li("info", "90 天內：若決定分年贈與，今年額度今年用（每人每年 244 萬）；申報由持照專業人員辦理")) + `</ul>`);
+});
+</script>
+</body>
+</html>

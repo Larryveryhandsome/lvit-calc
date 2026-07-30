@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#2c76f5" />
+<meta name="description" content="免費土地增值稅試算工具，免登入。一鍵算出自用住宅 10% 與一般用地稅額，支援三級累進、長期持有減徵、300/700㎡ 自動分段。附房地合一、重購退稅試算。" />
+<meta name="keywords" content="土增稅神器, 土地增值稅, 土增稅, 土增稅試算, 土地增值稅計算, 土地增值稅線上試算, 平均地權條例, 自用住宅用地稅率, 一般用地稅率, CPI 物價指數, 地號查詢, 公告現值, 前次移轉現值, 代書工具, 房仲工具, 地政工具" />
+<meta name="author" content="留白事務所有限公司" />
+<meta name="publisher" content="留白事務所有限公司" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://calc.zengzhisui.com/" />
+<meta property="og:title" content="土增稅神器 — 線上版｜免費土地增值稅試算" />
+<meta property="og:description" content="輸入地號或手動填，一鍵算出自用住宅與一般用地稅額。支援都市 300㎡、非都市 700㎡ 自動分段、三級累進、長期持有優惠。代書、房仲必備。" />
+<meta property="og:site_name" content="土增稅神器" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="土增稅神器 — 線上版土地增值稅試算工具" />
+<meta property="og:locale" content="zh_TW" />
+<meta property="og:locale:alternate" content="en_US" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="土增稅神器 — 線上版" />
+<meta name="twitter:description" content="輸入地號或手動填，一鍵算出土地增值稅。代書、房仲必備。" />
+<meta name="twitter:image" content="https://calc.zengzhisui.com/og-image.png" />
+
+<title>土增稅神器 — 土地增值稅線上試算｜房仲、代書必備</title>
+<link rel="canonical" href="https://calc.zengzhisui.com/" />
+<link rel="alternate" hreflang="zh-Hant-TW" href="https://calc.zengzhisui.com/" />
+<link rel="alternate" hreflang="x-default" href="https://calc.zengzhisui.com/" />
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="stylesheet" href="./styles.css?v=28" />
+
+<!-- JSON-LD: 讓 Google 認識這是什麼 App、誰做的 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://calc.zengzhisui.com/#webapp",
+      "name": "土增稅神器 線上版",
+      "alternateName": ["土增稅試算", "LVIT Calculator", "土地增值稅計算機"],
+      "url": "https://calc.zengzhisui.com/",
+      "description": "台灣土地增值稅免費線上試算工具，支援地號查詢、自動帶入、手動計算、三級累進、自用住宅分段稅額。",
+      "applicationCategory": "FinanceApplication",
+      "applicationSubCategory": "TaxCalculator",
+      "operatingSystem": "Any (Web Browser)",
+      "browserRequirements": "Requires JavaScript. Modern browser recommended.",
+      "inLanguage": ["zh-Hant-TW", "en"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "輸入地號自動查詢公告現值與前次移轉現值",
+        "匯入第二類謄本 PDF 自動解析",
+        "手動計算（公告現值 × 面積、持有年限、漲價倍數）",
+        "自用住宅用地 10% 稅率，超 300㎡ / 700㎡ 自動分段",
+        "三級累進 + 長期持有優惠 (20/30/40 年)",
+        "中英雙語 / 深淺色主題 / 可列印 PDF",
+        "PWA 離線可用、可加至手機主畫面",
+        "分享連結（URL 編碼參數）"
+      ],
+      "screenshot": "https://calc.zengzhisui.com/og-image.png",
+      "creator": { "@id": "https://app.zengzhisui.com/#organization" },
+      "publisher": { "@id": "https://app.zengzhisui.com/#organization" },
+      "isPartOf": { "@id": "https://app.zengzhisui.com/#website" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://app.zengzhisui.com/#organization",
+      "name": "留白事務所有限公司",
+      "alternateName": "Liubai Studio",
+      "url": "https://calc.zengzhisui.com/",
+      "logo": "https://calc.zengzhisui.com/favicon.svg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://calc.zengzhisui.com/#website",
+      "url": "https://calc.zengzhisui.com/",
+      "name": "土增稅神器 線上版",
+      "publisher": { "@id": "https://app.zengzhisui.com/#organization" },
+      "inLanguage": "zh-Hant-TW"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "土地增值稅怎麼計算？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "先算土地漲價總數額 a = 申報移轉現值 − 物價調整後原地價。再依漲價倍數 (a/B) 落在 0-1 / 1-2 / ≥2 套用三級稅率 (20% / 30% / 40%)，持有 20 年以上享長期優惠。自用住宅用地統一 10%，超過都市 300㎡ 或非都市 700㎡ 部分改用一般稅率。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "土增稅是誰要繳？買方還是賣方？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "原則上由出售土地的一方（原所有權人）繳納；贈與則由受贈人繳納。繼承取得的土地移轉不課土增稅。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "自用住宅稅率 10% 和一般用地差多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一般用地採三級累進 20%/30%/40%（持有滿 20 年以上第二、三級有長期減徵）；自用住宅用地一律 10%，都市 300㎡、非都市 700㎡ 以內適用，超過部分按一般稅率。同一筆土地用不用自用稅率，稅額可能差好幾倍。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "土增稅和房地合一稅有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "土增稅課的是土地公告現值的漲價；房地合一稅課的是房屋加土地的實際獲利。賣一筆有土地的房子通常兩種稅都會遇到，分別計算。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具誰做的？可靠嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "由留白事務所有限公司開發。計算依平均地權條例與土地稅法實作，含長期持有減徵、自用住宅超面積分段、物價指數調整。結果僅供試算參考，正式繳納以地方稅捐處核定為準。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28">
+          <rect x="2" y="2" width="28" height="28" rx="7" fill="currentColor"/>
+          <path d="M8 22 L16 8 L24 22 Z" fill="white" opacity=".95"/>
+          <circle cx="16" cy="19" r="2.2" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>土增稅神器</strong>
+        <em>線上版 · LVIT Calculator</em>
+      </span>
+    </a>
+    <nav class="header-actions">
+      <button id="btn-member" class="icon-btn" title="登入 / 會員" aria-label="會員">
+        <span id="member-label" data-i18n="nav.login">登入</span>
+      </button>
+      <button id="btn-lang" class="icon-btn" title="Switch language" aria-label="切換語言">
+        <span data-i18n="nav.lang">EN</span>
+      </button>
+      <button id="btn-theme" class="icon-btn" title="切換深淺色" aria-label="切換深淺色">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container main-grid">
+  <div class="page-head">
+    <h1>土地增值稅試算｜土增稅神器</h1>
+    <p>免費、免登入。輸入公告現值與前次移轉現值，一鍵算出<strong>自用住宅 10%</strong>與<strong>一般用地</strong>稅額，並看出兩者差額。</p>
+  </div>
+
+  <!-- ── Tab Bar ─────────────────────── -->
+  <nav class="tabs" role="tablist" aria-label="主要功能">
+    <button role="tab" aria-selected="true" aria-controls="tab-lookup" data-tab="lookup" class="tab active">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span data-i18n="tab.lookup">地號查詢</span>
+    </button>
+    <button role="tab" aria-selected="false" aria-controls="tab-pdf" data-tab="pdf" class="tab">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="10" y1="13" x2="14" y2="13"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
+      <span data-i18n="tab.pdf">匯入 PDF</span>
+    </button>
+    <button role="tab" aria-selected="false" aria-controls="tab-manual" data-tab="manual" class="tab">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span data-i18n="tab.manual">手動計算</span>
+    </button>
+  </nav>
+
+  <!-- ── Tab 1: 地號查詢 ─────────────────────── -->
+  <section class="panel lookup-panel tab-panel active" id="tab-lookup" role="tabpanel" aria-labelledby="lookup-heading">
+    <header class="panel-head">
+      <h2 id="lookup-heading" data-i18n="lookup.heading">按地號自動帶入</h2>
+      <div class="panel-actions">
+        <span id="member-badge" class="member-badge" hidden></span>
+      </div>
+    </header>
+    <div class="lookup-body">
+      <div class="field-group lookup-row">
+        <div class="field">
+          <label for="lk-city" data-i18n="lookup.city">縣市</label>
+          <select id="lk-city"></select>
+        </div>
+        <div class="field">
+          <label for="lk-town" data-i18n="lookup.town">鄉鎮 / 區</label>
+          <select id="lk-town"></select>
+        </div>
+      </div>
+      <div class="field-group lookup-row">
+        <div class="field" style="grid-column: 1 / -1">
+          <label for="lk-section">
+            <span data-i18n="lookup.section">段小段</span>
+            <span id="lk-section-hint" class="section-hint"></span>
+          </label>
+          <select id="lk-section" disabled>
+            <option value="" data-i18n="lookup.selectTownFirst">請先選擇縣市和鄉鎮</option>
+          </select>
+          <input type="text" id="lk-section-filter" autocomplete="off" placeholder="段名太多？輸入關鍵字過濾 (選填)" style="margin-top:6px" />
+        </div>
+      </div>
+      <div class="field-group lookup-row">
+        <div class="field">
+          <label for="lk-no1" data-i18n="lookup.no1">地號前 4 碼</label>
+          <input type="text" id="lk-no1" inputmode="numeric" maxlength="4" placeholder="例：0001" />
+        </div>
+        <div class="field">
+          <label for="lk-no2" data-i18n="lookup.no2">地號後 4 碼</label>
+          <input type="text" id="lk-no2" inputmode="numeric" maxlength="4" placeholder="例：0000" />
+        </div>
+      </div>
+      <div id="lookup-error" class="form-error" hidden></div>
+      <div class="lookup-actions">
+        <button type="button" id="btn-lookup" class="btn-primary btn-lookup" data-i18n="lookup.fetch">查詢並帶入</button>
+        <span class="lookup-hint" data-i18n="lookup.hint">需登入「土增稅神器」App 帳號，每次查詢將扣除點數。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tab 2: PDF 匯入 ─────────────────────── -->
+  <section class="panel pdf-panel tab-panel" id="tab-pdf" role="tabpanel" aria-labelledby="pdf-heading" hidden>
+    <header class="panel-head">
+      <h2 id="pdf-heading" data-i18n="pdf.heading">匯入第二類謄本 PDF</h2>
+    </header>
+    <div class="pdf-body">
+      <label for="pdf-input" class="pdf-drop" id="pdf-drop">
+        <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M24 38V14"/>
+          <polyline points="14 24 24 14 34 24"/>
+          <path d="M6 30v10a2 2 0 0 0 2 2h32a2 2 0 0 0 2-2V30"/>
+        </svg>
+        <strong data-i18n="pdf.dropTitle">拖拉 PDF 到此處或點擊選擇檔案</strong>
+        <span class="small" data-i18n="pdf.dropHint">支援「第二類謄本」PDF，系統自動解析公告現值、面積、前次移轉</span>
+        <input type="file" id="pdf-input" accept="application/pdf" hidden />
+      </label>
+      <div id="pdf-status" class="pdf-status" hidden></div>
+      <div class="pdf-beta">
+        <strong data-i18n="pdf.betaTitle">⚠ 此功能即將上線</strong>
+        <p class="small" data-i18n="pdf.betaBody">PDF 自動解析正在開發中。目前請使用「地號查詢」自動帶入，或用「手動計算」輸入。謄本 PDF 解析邏輯（約 500 行）需要額外移植到瀏覽器端（pdf.js + 文字解析），工作量較大因此獨立排程。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tab 3: 手動計算 (含結果區) ─────────────────────── -->
+  <div class="tab-panel tab-manual-wrap" id="tab-manual" role="tabpanel" aria-labelledby="input-heading" hidden>
+  <section class="panel input-panel" aria-labelledby="input-heading">
+    <header class="panel-head">
+      <h2 id="input-heading" data-i18n="input.heading">輸入土地資料</h2>
+      <div class="panel-actions">
+        <button type="button" id="btn-example" class="btn-ghost" data-i18n="input.example">載入範例</button>
+        <button type="button" id="btn-reset" class="btn-ghost" data-i18n="input.reset">清除</button>
+      </div>
+    </header>
+
+    <form id="calc-form" novalidate>
+      <div class="field-group">
+        <div class="field">
+          <label for="landValue" data-i18n="input.landValue">公告土地現值 <em class="unit">(元 / ㎡)</em></label>
+          <input type="number" id="landValue" inputmode="decimal" step="any" min="0" required placeholder="例：80000" />
+        </div>
+        <div class="field">
+          <label for="landOrgValue" data-i18n="input.landOrgValue">原地價 / 前次移轉現值 <em class="unit">(元 / ㎡)</em></label>
+          <input type="number" id="landOrgValue" inputmode="decimal" step="any" min="0" required placeholder="例：30000" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label for="landArea" data-i18n="input.landArea">土地面積 <em class="unit">(㎡)</em></label>
+          <input type="number" id="landArea" inputmode="decimal" step="any" min="0" required placeholder="例：100" />
+        </div>
+        <div class="field">
+          <label data-i18n="input.landType">土地類型</label>
+          <div class="segmented" role="radiogroup">
+            <input type="radio" name="landType" id="landType-city" value="city" checked />
+            <label for="landType-city" data-i18n="input.city">都市土地</label>
+            <input type="radio" name="landType" id="landType-rural" value="rural" />
+            <label for="landType-rural" data-i18n="input.rural">非都市土地</label>
+          </div>
+        </div>
+      </div>
+
+      <fieldset class="field-group">
+        <legend data-i18n="input.prevTransfer">前次移轉 / 原規定地價年月</legend>
+        <div class="field">
+          <label for="landYear">年 (民國)</label>
+          <input type="number" id="landYear" inputmode="numeric" step="1" min="48" max="115" required placeholder="48~115" />
+        </div>
+        <div class="field">
+          <label for="landMonth">月</label>
+          <input type="number" id="landMonth" inputmode="numeric" step="1" min="1" max="12" required placeholder="1~12" />
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend data-i18n="input.share">移轉持分</legend>
+        <div class="field">
+          <label for="landNumerator">分子</label>
+          <input type="number" id="landNumerator" inputmode="numeric" step="1" min="1" required value="1" />
+        </div>
+        <div class="field">
+          <label for="landDenominator">分母</label>
+          <input type="number" id="landDenominator" inputmode="numeric" step="1" min="1" required value="1" />
+        </div>
+      </fieldset>
+
+      <details class="advanced">
+        <summary data-i18n="input.advanced">進階選項</summary>
+        <div class="field">
+          <label for="targetDate" data-i18n="input.targetDate">本次移轉日 (預設：今日)</label>
+          <input type="date" id="targetDate" />
+        </div>
+        <div class="field">
+          <label for="extText" data-i18n="input.memo">備註 (選填)</label>
+          <input type="text" id="extText" maxlength="60" placeholder="e.g. 大安區土地 / 地段地號" />
+        </div>
+      </details>
+
+      <div id="form-error" class="form-error" role="alert" aria-live="polite" hidden></div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" data-i18n="input.calculate">立即試算</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ── 結果區 ─────────────────────── -->
+  <section class="panel result-panel" aria-labelledby="result-heading" id="result-section">
+    <header class="panel-head">
+      <h2 id="result-heading" data-i18n="result.heading">試算結果</h2>
+      <div class="panel-actions">
+        <button type="button" id="btn-share" class="btn-ghost" disabled data-i18n="result.share">分享連結</button>
+        <button type="button" id="btn-save" class="btn-ghost" disabled data-i18n="result.save">加入紀錄</button>
+        <button type="button" id="btn-print" class="btn-ghost" disabled data-i18n="result.print">列印</button>
+      </div>
+    </header>
+
+    <div id="result-empty" class="result-empty">
+      <p data-i18n="result.empty">填寫左側資料後按下「立即試算」，結果將顯示於此。</p>
+    </div>
+
+    <div id="result-body" hidden>
+      <div class="result-headline">
+        <div class="big-card big-card--self">
+          <div class="big-label" data-i18n="result.selfTitle">按自用住宅用地稅率</div>
+          <div class="big-value" id="r-self">—</div>
+          <div class="big-note" data-i18n="result.selfNote">漲價總數額 × 10%（超面積部分依一般用地級距）</div>
+        </div>
+        <div class="big-card big-card--normal">
+          <div class="big-label" data-i18n="result.normalTitle">按一般用地稅率</div>
+          <div class="big-value" id="r-normal">—</div>
+          <div class="big-note" id="r-tier"></div>
+        </div>
+      </div>
+
+      <!-- ── 一頁三鉤：差額 badge + 免費檢查表單 ── -->
+      <div id="result-hooks" hidden>
+        <div class="hook-diff">
+          <div class="hook-diff-label" data-i18n="hooks.diffLabel">一般稅率 vs 自用住宅稅率，差額最多</div>
+          <div class="hook-diff-amount" id="hook-diff-amount">—</div>
+          <p class="hook-note" id="hook-diff-note" data-i18n="hooks.diffNote">若符合自用住宅用地（一生一次／一生一屋）、重購退稅、長期持有等法定要件，實際稅額可能大不相同。是否符合，牽涉戶籍、時間與名下登記細節，需逐案確認。</p>
+        </div>
+        <div class="hook-cta">
+          <h3 class="hook-cta-title" data-i18n="hooks.ctaTitle">AI 稅務健檢報告｜搶先體驗名單</h3>
+          <p class="hook-note" data-i18n="hooks.ctaBody">即將上線：自動彙整這筆土地的兩種稅率差異、可能適用的法定優惠檢核與 90 天待辦清單，一鍵產出書面報告。留下聯絡方式，上線時第一批通知你（免費體驗名額）。本站為資訊與工具服務；土地登記、稅務申報屬地政士／記帳士之業務。</p>
+          <a id="hook-line-btn" class="btn-line" href="#" target="_blank" rel="noopener" hidden>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.383c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+            <span data-i18n="hooks.lineCta">加 LINE 好友，直接免費諮詢</span>
+          </a>
+          <p class="hook-or" id="hook-or" hidden data-i18n="hooks.orForm">或留下聯絡方式，我們主動聯繫你：</p>
+          <form id="lead-form" novalidate>
+            <div class="field-group">
+              <div class="field">
+                <label for="ld-name" data-i18n="hooks.name">稱呼</label>
+                <input type="text" id="ld-name" maxlength="30" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="ld-contact" data-i18n="hooks.contact">LINE ID 或手機</label>
+                <input type="text" id="ld-contact" maxlength="60" autocomplete="tel" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="ld-need" data-i18n="hooks.need">你的情況</label>
+              <select id="ld-need">
+                <option value="sell" data-i18n="hooks.needSell">打算賣地／賣房</option>
+                <option value="repurchase" data-i18n="hooks.needRepurchase">換屋（可能適用重購退稅）</option>
+                <option value="inherit" data-i18n="hooks.needInherit">繼承或贈與規劃</option>
+                <option value="other" data-i18n="hooks.needOther">只是先試算</option>
+              </select>
+            </div>
+            <div id="lead-error" class="form-error" hidden></div>
+            <button type="submit" id="ld-submit" class="btn-primary" data-i18n="hooks.submit">登記搶先體驗（免費）</button>
+            <p class="hook-legal" data-i18n="hooks.privacy">送出即同意留白事務所為聯繫與評估目的使用上述資料，可隨時要求刪除。</p>
+            <p class="hook-legal" data-i18n="hooks.legal">以上為估算值，非任何稅額或優惠之保證；實際稅額以主管稽徵機關核定為準。</p>
+          </form>
+          <div id="lead-success" class="hook-success" hidden>
+            <strong data-i18n="hooks.success">已登記！上線時第一批通知你。</strong>
+            <p class="hook-note" id="lead-line-wrap" hidden><span data-i18n="hooks.successNote">想更快？加 LINE 直接聊：</span> <a id="lead-line-link" href="#" target="_blank" rel="noopener">LINE</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div><span data-i18n="result.hold">持有年限</span><strong id="r-hold">—</strong></div>
+        <div><span data-i18n="result.transferArea">移轉面積</span><strong id="r-area">—</strong></div>
+        <div><span data-i18n="result.transferValue">申報移轉現值 (A)</span><strong id="r-transferVal">—</strong></div>
+        <div><span data-i18n="result.cpiValue">物價調整後原地價 (B)</span><strong id="r-cpiVal">—</strong></div>
+        <div><span data-i18n="result.totalValue">土地漲價總數額 (a)</span><strong id="r-totalVal">—</strong></div>
+        <div><span data-i18n="result.multiple">漲價倍數</span><strong id="r-multiple">—</strong></div>
+        <div><span data-i18n="result.cpi">前次移轉月 CPI</span><strong id="r-cpi">—</strong></div>
+        <div><span data-i18n="result.overLimit">超自用限額</span><strong id="r-over">—</strong></div>
+      </div>
+
+      <details class="breakdown">
+        <summary data-i18n="result.levelTitle">三級稅額明細</summary>
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="result.level">級別</th>
+              <th data-i18n="result.formula">公式</th>
+              <th data-i18n="result.amount">稅額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="row-L1"><td>第一級</td><td>a × 20%</td><td id="r-L1">—</td></tr>
+            <tr id="row-L2"><td>第二級</td><td>a × 30%/28%/27%/26% − B × 10%/8%/7%/6%</td><td id="r-L2">—</td></tr>
+            <tr id="row-L3"><td>第三級</td><td>a × 40%/36%/34%/32% − B × 30%/24%/21%/18%</td><td id="r-L3">—</td></tr>
+          </tbody>
+        </table>
+        <p class="small" data-i18n="result.levelNote">百分比依持有年限 &lt;20 / 20-30 / 30-40 / &gt;=40 年分別適用；持有 20 年以上部分享長期優惠。</p>
+      </details>
+
+      <div id="result-warnings" class="warnings" hidden></div>
+    </div>
+  </section>
+  </div><!-- /tab-manual -->
+
+  <!-- ── 歷史紀錄 ─────────────────────── -->
+  <section class="panel history-panel" aria-labelledby="history-heading">
+    <header class="panel-head">
+      <h2 id="history-heading" data-i18n="history.heading">歷史紀錄</h2>
+      <div class="panel-actions">
+        <button type="button" id="btn-clear-history" class="btn-ghost" data-i18n="history.clear">全部清除</button>
+      </div>
+    </header>
+    <ul id="history-list" class="history-list">
+      <li class="history-empty" data-i18n="history.empty">目前尚無紀錄。按下「加入紀錄」即可保存。</li>
+    </ul>
+    <p class="small" data-i18n="history.note">歷史紀錄僅儲存於您的瀏覽器，關閉裝置仍可保留。</p>
+  </section>
+</main>
+
+<section class="container info-section">
+  <details class="info-block">
+    <summary data-i18n="info.howTitle">計算方式說明</summary>
+    <ol>
+      <li data-i18n="info.step1">① 以前次移轉或原規定地價時點之 CPI 換算：<em>B = 原地價 × CPI / 100 × 移轉面積</em></li>
+      <li data-i18n="info.step2">② 申報移轉現值 <em>A = 公告現值 × 移轉面積</em></li>
+      <li data-i18n="info.step3">③ 土地漲價總數額 <em>a = A − B</em>；漲價倍數 <em>= a / B</em></li>
+      <li data-i18n="info.step4">④ 按漲價倍數 0-1 / 1-2 / ≥2 分別適用第一、二、三級稅率</li>
+      <li data-i18n="info.step5">⑤ 自用住宅用地稅率 10%；超過 300 ㎡ (都市) 或 700 ㎡ (非都市) 部分改按一般用地稅率計算</li>
+    </ol>
+    <p class="small" data-i18n="info.lawNote">依據：平均地權條例 §33、土地稅法 §33、§34。本工具僅供參考，實際稅額以主管機關核定為準。</p>
+  </details>
+
+  <details class="info-block">
+    <summary data-i18n="info.disclaimerTitle">免責聲明</summary>
+    <div class="legal-text" id="disclaimer-box"></div>
+  </details>
+</section>
+
+<!-- ── 其他免費工具（放在計算機正下方，提升工具使用率） ────────── -->
+<section class="container tool-strip-wrap">
+  <h2 class="tool-strip-title">賣房、換屋、繼承？其他稅也一起算</h2>
+  <div class="tool-strip">
+    <a class="tool-card tool-card-hero" href="./tools/report.html">
+      <span class="tc-ico">📊</span>
+      <strong>賣房稅務總報告</strong>
+      <span>土增稅＋房地合一＋重購退稅，一次算完總稅負</span>
+    </a>
+    <a class="tool-card" href="./tools/house-tax.html">
+      <span class="tc-ico">🏠</span>
+      <strong>房地合一稅試算</strong>
+      <span>賣房獲利要繳多少？含自住 400 萬免稅</span>
+    </a>
+    <a class="tool-card" href="./tools/repurchase-refund.html">
+      <span class="tc-ico">↩️</span>
+      <strong>重購退稅試算</strong>
+      <span>換屋 2 年內，土增稅可退多少</span>
+    </a>
+    <a class="tool-card" href="./tools/estate-tax.html">
+      <span class="tc-ico">🕯️</span>
+      <strong>遺產稅試算</strong>
+      <span>免稅額 1,333 萬與扣除額自動算</span>
+    </a>
+    <a class="tool-card" href="./tools/checkup.html">
+      <span class="tc-ico">📋</span>
+      <strong>30 秒稅務健檢</strong>
+      <span>賣地／換屋／繼承的 90 天待辦</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── SEO 內容區（土增稅權威內容 + 內部連結） ────────── -->
+<section class="container seo-content">
+  <h2>土地增值稅（土增稅）是什麼？</h2>
+  <p>土地增值稅（簡稱<strong>土增稅</strong>）是土地所有權移轉時，針對土地「公告現值的漲價部分」課徵的稅，依《平均地權條例》第 33 條與《土地稅法》第 33、34 條計算。只要是<strong>買賣、贈與</strong>土地就會發生；<strong>繼承</strong>取得的土地移轉則不課徵土增稅。要提醒的是：土增稅課的是「土地公告現值的漲價」，不是成交價，也和房屋無關（房屋部分是契稅與房地合一稅）。</p>
+
+  <h2>土增稅怎麼算？三分鐘看懂公式</h2>
+  <p>用本頁上方的<a href="#tab-manual">免費試算工具</a>輸入資料即可自動算出，公式邏輯如下：</p>
+  <ol>
+    <li><strong>申報移轉現值 A</strong> ＝ 公告土地現值 × 移轉面積</li>
+    <li><strong>物價調整後原地價 B</strong> ＝ 前次移轉現值 × (移轉時物價指數 CPI ÷ 前次移轉時 CPI) × 面積</li>
+    <li><strong>土地漲價總數額 a</strong> ＝ A − B；<strong>漲價倍數</strong> ＝ a ÷ B</li>
+    <li>依漲價倍數落在 0–1／1–2／≥2，套用第一、二、三級累進稅率</li>
+  </ol>
+
+  <h2>土增稅稅率：自用住宅 10% vs 一般用地 20~40%</h2>
+  <p>這是土增稅最大的節稅關鍵。<strong>一般用地</strong>採三級累進，稅率 20%／30%／40%（持有滿 20 年以上，第二、三級有長期持有減徵）；<strong>自用住宅用地</strong>則不分級，一律 <strong>10%</strong>。同一筆土地，用不用自用住宅稅率，稅額可能差好幾倍——這也是本工具會把「自用」與「一般」兩種稅額並列給你看的原因。</p>
+  <div class="table-scroll">
+    <table class="seo-table">
+      <thead><tr><th>持有年限</th><th>第一級（倍數&lt;1）</th><th>第二級（1~2）</th><th>第三級（≥2）</th></tr></thead>
+      <tbody>
+        <tr><td>未滿 20 年</td><td>a×20%</td><td>a×30%−B×10%</td><td>a×40%−B×30%</td></tr>
+        <tr><td>20~30 年</td><td>a×20%</td><td>a×28%−B×8%</td><td>a×36%−B×24%</td></tr>
+        <tr><td>30~40 年</td><td>a×20%</td><td>a×27%−B×7%</td><td>a×34%−B×21%</td></tr>
+        <tr><td>滿 40 年</td><td>a×20%</td><td>a×26%−B×6%</td><td>a×32%−B×18%</td></tr>
+        <tr><td><strong>自用住宅</strong></td><td colspan="3"><strong>一律 10%</strong>（都市 300㎡／非都市 700㎡ 以內，超過部分按一般稅率）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>土增稅可以省嗎？五個合法方向</h2>
+  <ul>
+    <li><strong>自用住宅一生一次</strong>：本人或配偶、直系親屬設籍、出售前一年未出租營業，可用 10% 稅率。</li>
+    <li><strong>長期持有減徵</strong>：持有滿 20／30／40 年，超過最低稅率部分自動減徵 20％／30％／40%。</li>
+    <li><strong>重購退稅</strong>：兩年內賣舊買新自用住宅，已繳土增稅有機會退回——<a href="./tools/repurchase-refund.html">用重購退稅試算</a>看可退多少。</li>
+    <li><strong>農地作農業使用</strong>：取得農用證明，移轉不課徵土增稅。</li>
+    <li><strong>賣房別忘了同時算房地合一稅</strong>：土地＋建物出售會同時發生兩種稅，<a href="./tools/house-tax.html">用房地合一試算</a>一起看。</li>
+  </ul>
+  <p>是否符合各項優惠要件牽涉設籍、時間與名下登記細節，實際稅額以主管稽徵機關核定為準；需要辦理登記或申報時，由地政士、記帳士等具名專業人員辦理。</p>
+
+  <h2>更多土增稅與不動產稅務工具</h2>
+  <ul class="seo-links">
+    <li><a href="#tab-manual">土地增值稅試算（本頁，免費免登入）</a></li>
+    <li><a href="./tools/checkup.html">不動產稅務健檢：賣地／換屋／繼承 90 天待辦</a></li>
+    <li><a href="./tools/house-tax.html">房地合一稅試算</a>｜<a href="./tools/repurchase-refund.html">重購退稅試算</a>｜<a href="./tools/estate-tax.html">遺產稅試算</a></li>
+    <li><a href="./articles/">土增稅・繼承・贈與 懶人包文章</a></li>
+  </ul>
+
+  <h2 id="faq">土增稅常見問題</h2>
+  <div class="seo-faq">
+    <h3>土增稅是誰要繳？買方還是賣方？</h3>
+    <p>原則上由<strong>出售土地的一方（原所有權人）</strong>繳納；贈與則由受贈人繳納。繼承取得的土地移轉不課土增稅。</p>
+    <h3>土增稅什麼時候要申報、什麼時候繳？</h3>
+    <p>土地買賣、贈與訂立契約後 30 日內申報現值，經稽徵機關核定後繳納，通常由承辦的地政士協助辦理。公告土地現值每年 1 月 1 日調整，跨年移轉可能影響稅額。</p>
+    <h3>土增稅和房地合一稅有什麼不同？</h3>
+    <p>土增稅課的是「土地公告現值的漲價」，房地合一稅課的是「房屋＋土地實際獲利」。賣一筆有土地的房子通常兩種稅都會遇到，兩者分別計算。可分別用<a href="#tab-manual">土增稅試算</a>與<a href="./tools/house-tax.html">房地合一試算</a>估算。</p>
+    <h3>自用住宅一生一次和一生一屋差在哪？</h3>
+    <p>「一生一次」全國一輩子用一次、不限設籍年數（面積都市 300㎡／非都市 700㎡）；用過後符合「一生一屋」條件（設籍並持有連續滿 6 年等）可不限次數，但面積上限較小。兩者都是 10% 優惠稅率。</p>
+  </div>
+  <p class="small">本站為土地增值稅資訊與試算服務，非法律或稅務意見；實際稅額以主管稽徵機關核定為準。留白事務所有限公司提供，非地政士／會計師／記帳士／律師事務所；登記與申報由持照專業人員辦理。</p>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>© <span id="year"></span> 留白事務所 · <span data-i18n="footer.tagline">土增稅神器線上版</span></div>
+    <div class="footer-links">
+      <a href="./articles/">稅務文章</a>
+      <a href="./tools/checkup.html">稅務健檢</a>
+      <a href="./tools/estate-tax.html">遺產稅試算</a>
+      <a href="./tools/house-tax.html">房地合一試算</a>
+      <a href="./tools/repurchase-refund.html">重購退稅試算</a>
+      <a href="./pro/">代書工具</a>
+      <a href="#" id="btn-about" data-i18n="footer.about">關於</a>
+    </div>
+  </div>
+</footer>
+
+<dialog id="onboard-dialog" class="about-dialog onboard-dialog">
+  <article>
+    <div class="onboard-logo">
+      <svg viewBox="0 0 48 48" width="56" height="56">
+        <rect width="48" height="48" rx="12" fill="#2c76f5"/>
+        <path d="M10 34 L24 12 L38 34 Z" fill="#fff" opacity=".95"/>
+        <circle cx="24" cy="29" r="3.5" fill="#2c76f5"/>
+      </svg>
+    </div>
+    <h2 style="text-align:center" data-i18n="onboard.title">歡迎使用 土增稅神器</h2>
+    <p style="text-align:center" data-i18n="onboard.body">100% 免費線上土地增值稅試算，免登入、免下載。點「手動計算」直接輸入資料即可算稅。</p>
+    <div class="onboard-apps" style="flex-direction:column;gap:8px">
+      <a href="./tools/checkup.html" class="btn-primary" style="width:100%;text-align:center;text-decoration:none;line-height:44px" data-i18n="onboard.checkup">30 秒稅務健檢（賣地／換屋／繼承）</a>
+      <a href="./articles/" class="btn-ghost" style="width:100%;text-align:center;text-decoration:none;line-height:40px" data-i18n="onboard.articles">看土增稅懶人包文章</a>
+    </div>
+    <div class="onboard-footer">
+      <button type="button" id="onboard-later" class="btn-ghost" data-i18n="onboard.later">開始試算</button>
+    </div>
+  </article>
+</dialog>
+
+<dialog id="login-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="login.title">登入土增稅神器</h2>
+    <p class="small" data-i18n="login.intro">使用既有的「土增稅神器」帳號登入，即可使用地號自動帶入。一般試算免登入。</p>
+    <form id="login-form">
+      <div class="field" style="margin-top:12px">
+        <label for="lg-account" data-i18n="login.account">帳號</label>
+        <input type="text" id="lg-account" autocomplete="username" required />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="lg-password" data-i18n="login.password">密碼</label>
+        <input type="password" id="lg-password" autocomplete="current-password" required />
+      </div>
+      <div id="login-error" class="form-error" hidden style="margin-top:12px"></div>
+      <div style="display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap">
+        <div style="display:flex;gap:14px;font-size:.82rem">
+          <a href="#" id="lg-goto-register" data-i18n="login.toRegister">註冊新帳號</a>
+          <a href="#" id="lg-goto-forgot" data-i18n="login.forgot">忘記密碼？</a>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button type="button" id="lg-cancel" class="btn-ghost" data-i18n="login.cancel">取消</button>
+          <button type="submit" class="btn-primary" style="width:auto;padding:0 22px;height:40px" data-i18n="login.submit">登入</button>
+        </div>
+      </div>
+    </form>
+  </article>
+</dialog>
+
+<dialog id="register-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="register.title">註冊新帳號</h2>
+    <p class="small" data-i18n="register.intro">免費建立帳號即可使用進階功能。一般土增稅試算無需註冊、永久免費。</p>
+    <form id="register-form">
+      <div class="field" style="margin-top:12px">
+        <label for="rg-account" data-i18n="register.account">帳號 <span class="req">*</span></label>
+        <input type="text" id="rg-account" autocomplete="username" required pattern="[A-Za-z0-9_.@-]{4,64}" />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="rg-password" data-i18n="register.password">密碼 <span class="req">*</span></label>
+        <input type="password" id="rg-password" autocomplete="new-password" required minlength="6" />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="rg-password2" data-i18n="register.password2">再次輸入密碼 <span class="req">*</span></label>
+        <input type="password" id="rg-password2" autocomplete="new-password" required minlength="6" />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="rg-name" data-i18n="register.name">姓名 <span class="req">*</span></label>
+        <input type="text" id="rg-name" required maxlength="30" />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="rg-mobile" data-i18n="register.mobile">手機 (選填)</label>
+        <input type="tel" id="rg-mobile" autocomplete="tel" pattern="[0-9+\- ]*" maxlength="20" />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="rg-birthday" data-i18n="register.birthday">生日 (選填)</label>
+        <input type="date" id="rg-birthday" />
+      </div>
+      <label style="display:flex;gap:6px;align-items:flex-start;margin-top:12px;font-size:.82rem;color:var(--ink-soft)">
+        <input type="checkbox" id="rg-agree" required />
+        <span data-i18n="register.agree">我同意《服務條款》與《隱私權政策》（本網頁不會留存您的密碼，僅傳給土增稅神器後端建立帳號）</span>
+      </label>
+      <div id="register-error" class="form-error" hidden style="margin-top:12px"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+        <button type="button" id="rg-cancel" class="btn-ghost" data-i18n="register.cancel">取消</button>
+        <button type="submit" class="btn-primary" style="width:auto;padding:0 22px;height:40px" data-i18n="register.submit">註冊</button>
+      </div>
+    </form>
+  </article>
+</dialog>
+
+<dialog id="forgot-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="forgot.title">忘記密碼</h2>
+    <p class="small" data-i18n="forgot.intro">透過帳號 + 手機 + 生日驗證身分後設定新密碼。</p>
+    <form id="forgot-form">
+      <div class="field" style="margin-top:12px">
+        <label for="fg-account" data-i18n="forgot.account">帳號</label>
+        <input type="text" id="fg-account" required />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="fg-mobile" data-i18n="forgot.mobile">註冊時填寫的手機</label>
+        <input type="tel" id="fg-mobile" required />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="fg-birthday" data-i18n="forgot.birthday">註冊時填寫的生日</label>
+        <input type="date" id="fg-birthday" required />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="fg-password" data-i18n="forgot.newPassword">新密碼</label>
+        <input type="password" id="fg-password" required minlength="6" autocomplete="new-password" />
+      </div>
+      <div id="forgot-error" class="form-error" hidden style="margin-top:12px"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+        <button type="button" id="fg-cancel" class="btn-ghost" data-i18n="forgot.cancel">取消</button>
+        <button type="submit" class="btn-primary" style="width:auto;padding:0 22px;height:40px" data-i18n="forgot.submit">設定新密碼</button>
+      </div>
+    </form>
+  </article>
+</dialog>
+
+<dialog id="profile-dialog" class="about-dialog profile-dialog">
+  <article>
+    <div class="profile-head">
+      <h2 data-i18n="profile.title">會員中心</h2>
+      <button type="button" id="pf-close-x" class="icon-btn" aria-label="關閉">✕</button>
+    </div>
+    <div class="profile-card">
+      <div class="profile-row"><span data-i18n="profile.name">姓名</span><strong id="pf-name">—</strong></div>
+      <div class="profile-row"><span data-i18n="profile.account">帳號</span><strong id="pf-account">—</strong></div>
+      <div class="profile-row"><span data-i18n="profile.mobile">手機</span><strong id="pf-mobile">—</strong></div>
+      <div class="profile-row"><span data-i18n="profile.twIdNumber">身分證字號</span><strong id="pf-tw-id">—</strong></div>
+      <div class="profile-row"><span data-i18n="profile.memberExpired">會員到期日</span><strong id="pf-member-exp">—</strong></div>
+      <div class="profile-row"><span data-i18n="profile.commercialExpired">商用到期日</span><strong id="pf-commercial-exp">—</strong></div>
+      <div class="profile-row points-row"><span data-i18n="profile.points">點數</span><strong id="pf-points">0</strong></div>
+    </div>
+
+    <div class="profile-actions">
+      <button type="button" id="pf-topup" class="btn-primary" style="width:100%" data-i18n="profile.topup">儲值點數</button>
+      <div class="profile-action-grid">
+        <button type="button" id="pf-edit" class="btn-ghost" data-i18n="profile.edit">修改資料</button>
+        <button type="button" id="pf-change-pw" class="btn-ghost" data-i18n="profile.changePw">修改密碼</button>
+        <button type="button" id="pf-refresh" class="btn-ghost" data-i18n="profile.refresh">重新整理</button>
+        <button type="button" id="pf-logout" class="btn-ghost" data-i18n="profile.logout">登出</button>
+      </div>
+      <button type="button" id="pf-delete" class="btn-danger" data-i18n="profile.deleteAccount">刪除帳號</button>
+    </div>
+  </article>
+</dialog>
+
+<dialog id="edit-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="edit.title">修改個人資料</h2>
+    <form id="edit-form">
+      <div class="field" style="margin-top:12px">
+        <label for="ed-mobile" data-i18n="edit.mobile">手機</label>
+        <input type="tel" id="ed-mobile" />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="ed-birthday" data-i18n="edit.birthday">生日</label>
+        <input type="date" id="ed-birthday" />
+      </div>
+      <div id="edit-error" class="form-error" hidden style="margin-top:12px"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+        <button type="button" id="ed-cancel" class="btn-ghost" data-i18n="edit.cancel">取消</button>
+        <button type="submit" class="btn-primary" style="width:auto;padding:0 22px;height:40px" data-i18n="edit.submit">儲存</button>
+      </div>
+    </form>
+  </article>
+</dialog>
+
+<dialog id="changepw-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="changepw.title">修改密碼</h2>
+    <p class="small" data-i18n="changepw.intro">為保護您的帳號，修改密碼會走與「忘記密碼」相同的身分驗證流程。</p>
+    <form id="changepw-form">
+      <div class="field" style="margin-top:12px">
+        <label for="cp-mobile" data-i18n="forgot.mobile">註冊時填寫的手機</label>
+        <input type="tel" id="cp-mobile" required />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="cp-birthday" data-i18n="forgot.birthday">註冊時填寫的生日</label>
+        <input type="date" id="cp-birthday" required />
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="cp-password" data-i18n="forgot.newPassword">新密碼</label>
+        <input type="password" id="cp-password" required minlength="6" autocomplete="new-password" />
+      </div>
+      <div id="changepw-error" class="form-error" hidden style="margin-top:12px"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+        <button type="button" id="cp-cancel" class="btn-ghost" data-i18n="edit.cancel">取消</button>
+        <button type="submit" class="btn-primary" style="width:auto;padding:0 22px;height:40px" data-i18n="changepw.submit">設定新密碼</button>
+      </div>
+    </form>
+  </article>
+</dialog>
+
+<dialog id="topup-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="topup.title">地號查詢點數</h2>
+    <p data-i18n="topup.body">「手動計算」永久免費、無需點數。地號自動帶入為進階功能，供既有帳號使用；目前點數儲值管道調整中，代書、事務所如需開通批量地號查詢，歡迎透過 LINE 與我們聯繫。</p>
+    <div class="topup-apps" style="justify-content:center">
+      <a class="btn-primary js-line-cta" href="#" hidden target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px" data-i18n="topup.lineCta">加 LINE 詢問開通</a>
+    </div>
+    <p class="small" data-i18n="topup.note">不需地號查詢？直接用「手動計算」輸入公告現值與前次移轉，一樣算得出來。</p>
+    <form method="dialog" style="margin-top:10px;text-align:right">
+      <button class="btn-ghost" data-i18n="topup.close">關閉</button>
+    </form>
+  </article>
+</dialog>
+
+<dialog id="pick-dialog" class="about-dialog pick-dialog">
+  <article>
+    <div class="pick-head">
+      <h2 data-i18n="pick.title">選擇要計算的資料</h2>
+      <button type="button" id="pick-close-x" class="icon-btn" aria-label="關閉">✕</button>
+    </div>
+    <p class="small" data-i18n="pick.intro">此地號有多筆持有資料，可單選或勾選多筆綜合計算（綜合 = 各筆稅額加總）</p>
+    <div class="pick-toolbar">
+      <label class="pick-all-label">
+        <input type="checkbox" id="pick-all" />
+        <span data-i18n="pick.selectAll">全選</span>
+      </label>
+      <span id="pick-count" class="pick-count">0 / 0</span>
+    </div>
+    <ul id="pick-list" class="pick-list"></ul>
+    <div class="pick-footer">
+      <button type="button" id="pick-cancel" class="btn-ghost" data-i18n="pick.close">取消</button>
+      <button type="button" id="pick-submit" class="btn-primary pick-submit" disabled>
+        <span id="pick-submit-label" data-i18n="pick.calculate">綜合計算</span>
+      </button>
+    </div>
+  </article>
+</dialog>
+
+<dialog id="combined-dialog" class="about-dialog combined-dialog">
+  <article>
+    <div class="pick-head">
+      <h2 data-i18n="combined.title">綜合計算結果</h2>
+      <button type="button" id="combined-close-x" class="icon-btn" aria-label="關閉">✕</button>
+    </div>
+    <p class="small" id="combined-intro"></p>
+
+    <div class="combined-summary">
+      <div class="big-card big-card--self">
+        <div class="big-label" data-i18n="result.selfTitle">按自用住宅用地稅率</div>
+        <div class="big-value" id="combined-self">—</div>
+        <div class="big-note" data-i18n="combined.sumNote">所選筆數加總稅額</div>
+      </div>
+      <div class="big-card big-card--normal">
+        <div class="big-label" data-i18n="result.normalTitle">按一般用地稅率</div>
+        <div class="big-value" id="combined-normal">—</div>
+        <div class="big-note" id="combined-tier"></div>
+      </div>
+    </div>
+
+    <details class="breakdown" open>
+      <summary data-i18n="combined.detail">各筆明細</summary>
+      <div id="combined-detail"></div>
+    </details>
+
+    <div class="pick-footer">
+      <button type="button" id="combined-close" class="btn-ghost" data-i18n="combined.close">關閉</button>
+      <button type="button" id="combined-print" class="btn-ghost" data-i18n="combined.print">列印 / 存 PDF</button>
+    </div>
+  </article>
+</dialog>
+
+<dialog id="about-dialog" class="about-dialog">
+  <article>
+    <h2 data-i18n="about.title">關於土增稅神器</h2>
+    <p data-i18n="about.body1">本網頁為「土增稅神器」行動 App 的免費線上版本，由留白事務所提供。所有計算於您的瀏覽器本機完成，<strong>不會傳送任何資料到伺服器</strong>。</p>
+    <p data-i18n="about.body2">計算公式對應行動 App，包含持有年限長期減徵、自用住宅超面積分段、物價指數調整等。結果僅供試算參考，正式繳納請以地方稅捐處核定為準。</p>
+    <p class="small" data-i18n="about.version">版本：v1.0.0 (Web)</p>
+    <form method="dialog"><button data-i18n="about.close">關閉</button></form>
+  </article>
+</dialog>
+
+<!-- Netlify Forms 偵測用隱藏表單（勿刪；實際送出由 app.js fetch 處理） -->
+<form name="lead" data-netlify="true" netlify-honeypot="website" hidden>
+  <input type="text" name="name" />
+  <input type="text" name="contact" />
+  <input type="text" name="need" />
+  <input type="text" name="calc_summary" />
+  <input type="text" name="ref" />
+  <input type="text" name="lang" />
+  <input type="text" name="website" />
+</form>
+
+<script src="./line-config.js?v=28"></script>
+<script type="module" src="./app.js?v=28"></script>
+</body>
+</html>

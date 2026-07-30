@@ -1,0 +1,21 @@
+{
+  "name": "土增稅神器 線上版",
+  "short_name": "土增稅神器",
+  "description": "台灣土地增值稅線上試算工具",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f2f1f2",
+  "theme_color": "#2c76f5",
+  "lang": "zh-Hant-TW",
+  "categories": ["finance", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

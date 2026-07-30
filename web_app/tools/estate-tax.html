@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>遺產稅試算 2026｜免稅額 1,333 萬、扣除額自動算｜留白事務所</title>
+<meta name="description" content="免費遺產稅試算 2026：免稅額 1,333 萬、配偶 553 萬、子女每人 56 萬、喪葬費 138 萬自動扣除，10%/15%/20% 級距一鍵算，含配偶剩餘財產差額分配請求權與死亡前 2 年贈與併回。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/tools/estate-tax.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css?v=28" />
+<link rel="stylesheet" href="../articles/articles.css?v=28" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="遺產稅試算 2026｜免費線上工具" />
+<meta property="og:description" content="輸入遺產總額與家庭狀況，免稅額與扣除額自動算，一鍵得出應納遺產稅。" />
+<meta property="og:url" content="https://calc.zengzhisui.com/tools/estate-tax.html" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"遺產稅試算 2026","url":"https://calc.zengzhisui.com/tools/estate-tax.html","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"publisher":{"@type":"Organization","name":"留白事務所有限公司"}}
+</script>
+<style>
+.tool-form { display:grid; gap:12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:16px 0; }
+.tool-form .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:520px){ .tool-form .row { grid-template-columns:1fr; } }
+.tool-form label { font-size:.82rem; font-weight:700; color:var(--ink-soft); display:block; margin-bottom:4px; }
+.tool-form input[type=number], .tool-form select { width:100%; height:42px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; font-size:1rem; background:var(--bg); color:var(--ink); box-sizing:border-box; }
+.tool-form button { height:46px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:700; font-size:1rem; cursor:pointer; }
+.tool-result { display:none; border:1px solid var(--border-strong); border-left:4px solid var(--brand); border-radius:var(--radius); background:var(--surface); padding:16px; margin:14px 0; }
+.tool-result .big { font-size:1.7rem; font-weight:800; color:var(--brand); font-variant-numeric:tabular-nums; }
+.tool-result table { width:100%; border-collapse:collapse; font-size:.85rem; margin:10px 0; }
+.tool-result td { padding:4px 6px; border-bottom:1px solid var(--border); }
+.tool-result td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+.tool-result p { font-size:.85rem; margin:.5rem 0; }
+.hint { font-size:.75rem; color:var(--ink-faint); }
+.tip { border:1px solid var(--warn); background:var(--brand-soft); border-radius:var(--radius-sm); padding:10px 12px; font-size:.83rem; margin-top:10px; display:none; }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">留白事務所｜土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">土增稅試算 →</a>
+</div>
+<article class="post">
+<h1>遺產稅試算（2026 年版）</h1>
+<div class="post-meta">免費工具 · 依遺產及贈與稅法 · <a href="../articles/estate-tax-2026.html">看完整教學</a></div>
+<p>輸入遺產總額與家庭狀況，免稅額 <strong>1,333 萬</strong>與各項扣除額自動計算，依 10%／15%／20% 三級累進一鍵算出應納遺產稅。常被忽略的<strong>配偶剩餘財產差額分配請求權</strong>與<strong>死亡前 2 年贈與併回</strong>也能一起試算。</p>
+
+<form class="tool-form" id="et-form">
+  <div class="row">
+    <div><label for="et-total">遺產總額（萬元）</label><input type="number" id="et-total" inputmode="decimal" min="0" step="any" placeholder="例：6000" required /><span class="hint">不動產以公告現值＋房屋評定現值計，非市價</span></div>
+    <div><label for="et-addback">死亡前 2 年內贈與配偶/繼承人金額（萬元，選填）</label><input type="number" id="et-addback" inputmode="decimal" min="0" step="any" value="0" /><span class="hint">依法應併回遺產課稅</span></div>
+  </div>
+  <div class="row">
+    <div><label for="et-spouse">配偶</label><select id="et-spouse"><option value="1">健在（扣 553 萬）</option><option value="0">無／已歿</option></select></div>
+    <div><label for="et-desc">直系卑親屬人數（子女等）</label><input type="number" id="et-desc" inputmode="numeric" min="0" step="1" value="0" /><span class="hint">每人扣 56 萬（未成年另有加扣，本工具未計）</span></div>
+  </div>
+  <div class="row">
+    <div><label for="et-parents">父母健在人數（0–2）</label><input type="number" id="et-parents" inputmode="numeric" min="0" max="2" step="1" value="0" /><span class="hint">每人扣 138 萬</span></div>
+    <div><label for="et-disabled">重度以上身心障礙之配偶/繼承人數</label><input type="number" id="et-disabled" inputmode="numeric" min="0" step="1" value="0" /><span class="hint">每人加扣 693 萬</span></div>
+  </div>
+  <div>
+    <label for="et-claim">配偶剩餘財產差額分配請求權（萬元，選填）</label>
+    <input type="number" id="et-claim" inputmode="decimal" min="0" step="any" value="0" />
+    <span class="hint">＝（雙方婚後財產差額）÷ 2，可自遺產總額扣除。<a href="../articles/estate-tax-2026.html">怎麼算？</a></span>
+  </div>
+  <button type="submit">立即試算遺產稅</button>
+</form>
+
+<div class="tool-result" id="et-result">
+  <p style="margin-top:0">應納遺產稅（估算）：</p>
+  <p><span class="big" id="et-tax">—</span>　<span class="hint" id="et-eff"></span></p>
+  <table id="et-detail"></table>
+  <div class="tip" id="et-tip"></div>
+  <p class="hint">喪葬費 138 萬已自動扣除。未成年子女加扣、農地/公設地扣除、實物抵繳等個案項目未納入本估算；實際稅額以稽徵機關核定為準。</p>
+</div>
+
+<h2>2026 遺產稅級距速查</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>課稅遺產淨額</th><th>稅率</th><th>累進差額</th></tr></thead>
+<tbody>
+<tr><td>5,621 萬以下</td><td>10%</td><td>—</td></tr>
+<tr><td>5,621 萬 ～ 1 億 1,242 萬</td><td>15%</td><td>281.05 萬</td></tr>
+<tr><td>超過 1 億 1,242 萬</td><td>20%</td><td>843.15 萬</td></tr>
+</tbody>
+</table></div>
+<p class="hint">課稅遺產淨額＝遺產總額（含 2 年內併回）− 免稅額 1,333 萬 − 各項扣除額。申報期限：死亡日起 6 個月內（可延 3 個月）。</p>
+
+<h2>常見問題</h2>
+<h3>遺產稅一定要在 6 個月內申報嗎？低於免稅額也要嗎？</h3>
+<p>是。依遺產及贈與稅法應於被繼承人死亡日起 6 個月內申報（有正當理由可延 3 個月）；即使遺產低於免稅額，原則上仍應申報以取得免稅證明書，後續繼承登記、提領存款都會用到。詳見<a href="../articles/inherit-house-process.html">繼承房子過戶流程</a>。</p>
+<h3>配偶剩餘財產差額分配請求權可以省多少？</h3>
+<p>依民法第 1030 條之 1，生存配偶可就雙方婚後財產差額的半數主張分配請求權並自遺產總額扣除——差額大的家庭，稅額差距可達數十萬甚至數百萬。需完整整理雙方婚後財產證明，於申報時主張，建議由記帳士/會計師等持照專業人員協助。</p>
+<h3>生前把財產送給小孩就不用繳遺產稅了嗎？</h3>
+<p>要注意兩件事：死亡前 2 年內贈與配偶與繼承人的財產依法併回遺產課稅；而提早規劃的分年贈與（每人每年 244 萬免稅額）則是法律明文的傳承工具，須逐年依法申報。詳見<a href="../articles/gift-tax-244.html">贈與稅 244 萬怎麼用</a>。</p>
+</article>
+
+<div class="post-cta">
+  <h2>下一步</h2>
+  <p>遺產裡有不動產？用免費工具把土增稅與未來出售的房地合一稅一起算清楚；「AI 稅務健檢報告」即將上線，可在試算頁登記搶先體驗。</p>
+  <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">加 LINE，接收新工具通知</a>
+  <a class="btn-calc" href="https://calc.zengzhisui.com/">土增稅免費試算 →</a>
+  <a class="btn-calc" style="margin-top:8px;background:var(--surface);color:var(--brand);border:1.5px solid var(--brand)" href="./house-tax.html">房地合一試算 →</a>
+</div>
+<p class="post-disclaimer">本工具為一般性稅務資訊與試算服務，非法律或稅務意見；實際稅額與適用要件以主管稽徵機關核定為準。留白事務所有限公司｜本公司為顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記、稅務申報、法律文件分別由持照專業人員辦理。</p>
+</div>
+<script src="../line-config.js?v=28"></script>
+<script>
+document.getElementById("et-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const v = (id) => parseFloat(document.getElementById(id).value) || 0;
+  const total = v("et-total"), addback = v("et-addback"), claim = v("et-claim");
+  const spouse = document.getElementById("et-spouse").value === "1";
+  const desc = Math.max(0, Math.round(v("et-desc")));
+  const parents = Math.min(2, Math.max(0, Math.round(v("et-parents"))));
+  const disabled = Math.max(0, Math.round(v("et-disabled")));
+
+  const gross = total + addback;
+  const dedSpouse = spouse ? 553 : 0;
+  const dedDesc = desc * 56;
+  const dedParents = parents * 138;
+  const dedDisabled = disabled * 693;
+  const dedFuneral = 138;
+  const deductions = 1333 + dedSpouse + dedDesc + dedParents + dedDisabled + dedFuneral + claim;
+  const net = Math.max(0, gross - deductions);
+
+  let tax;
+  if (net <= 5621) tax = net * 0.10;
+  else if (net <= 11242) tax = net * 0.15 - 281.05;
+  else tax = net * 0.20 - 843.15;
+  tax = Math.max(0, tax);
+
+  const fmt = (n) => "NT$ " + Math.round(n * 10000).toLocaleString("zh-TW");
+  document.getElementById("et-tax").textContent = fmt(tax);
+  document.getElementById("et-eff").textContent = gross > 0 ? "（占遺產總額約 " + (tax / gross * 100).toFixed(1) + "%）" : "";
+
+  const rows = [
+    ["遺產總額（含 2 年內併回 " + addback + " 萬）", fmt(gross)],
+    ["免稅額", "−" + fmt(1333)],
+    spouse ? ["配偶扣除額", "−" + fmt(553)] : null,
+    desc ? ["直系卑親屬扣除（" + desc + " 人）", "−" + fmt(dedDesc)] : null,
+    parents ? ["父母扣除（" + parents + " 人）", "−" + fmt(dedParents)] : null,
+    disabled ? ["身心障礙特別扣除（" + disabled + " 人）", "−" + fmt(dedDisabled)] : null,
+    ["喪葬費扣除", "−" + fmt(138)],
+    claim ? ["剩餘財產差額分配請求權", "−" + fmt(claim)] : null,
+    ["課稅遺產淨額", fmt(net)],
+  ].filter(Boolean);
+  document.getElementById("et-detail").innerHTML = rows.map((r) => "<tr><td>" + r[0] + "</td><td>" + r[1] + "</td></tr>").join("");
+
+  const tip = document.getElementById("et-tip");
+  if (spouse && !claim && net > 0) {
+    tip.style.display = "block";
+    tip.innerHTML = "💡 你尚未填「配偶剩餘財產差額分配請求權」——這是民法明文的合法扣除，許多家庭因此少繳數十萬以上。<a href=\"../articles/estate-tax-2026.html\">看怎麼主張</a>";
+  } else if (net === 0) {
+    tip.style.display = "block";
+    tip.innerHTML = "依輸入數字，估算免稅（淨額為 0）。仍應於 6 個月內申報取得免稅證明書，供繼承登記使用。";
+  } else {
+    tip.style.display = "none";
+  }
+  document.getElementById("et-result").style.display = "block";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>重購退稅試算｜換屋可退多少土增稅？條件與 2 年期限一次看｜留白事務所</title>
+<meta name="description" content="免費重購退稅試算：輸入已繳土增稅與新舊屋申報移轉現值，估算換屋可退回多少土地增值稅。含 2 年期限、自用住宅要件與 5 年不得改用途的注意事項。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/tools/repurchase-refund.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css?v=28" />
+<link rel="stylesheet" href="../articles/articles.css?v=28" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="重購退稅試算｜換屋可退多少土增稅？" />
+<meta property="og:description" content="輸入已繳土增稅與新舊屋現值，一鍵估算可退金額；2 年期限錯過就沒有。" />
+<meta property="og:url" content="https://calc.zengzhisui.com/tools/repurchase-refund.html" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"重購退稅試算","url":"https://calc.zengzhisui.com/tools/repurchase-refund.html","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"publisher":{"@type":"Organization","name":"留白事務所有限公司"}}
+</script>
+<style>
+.tool-form { display:grid; gap:12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:16px 0; }
+.tool-form label { font-size:.82rem; font-weight:700; color:var(--ink-soft); display:block; margin-bottom:4px; }
+.tool-form input[type=number] { width:100%; height:42px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; font-size:1rem; background:var(--bg); color:var(--ink); box-sizing:border-box; }
+.tool-form button { height:46px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:700; font-size:1rem; cursor:pointer; }
+.tool-result { display:none; border:1px solid var(--border-strong); border-left:4px solid var(--success); border-radius:var(--radius); background:var(--surface); padding:16px; margin:14px 0; }
+.tool-result .big { font-size:1.6rem; font-weight:800; color:var(--success); font-variant-numeric:tabular-nums; }
+.tool-result p { font-size:.85rem; margin:.5rem 0; }
+.hint { font-size:.75rem; color:var(--ink-faint); }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">留白事務所｜土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">土增稅試算 →</a>
+</div>
+<article class="post">
+<h1>重購退稅試算（土地增值稅）</h1>
+<div class="post-meta">免費工具 · 依土地稅法第 35 條 · <a href="../articles/">稅務文章</a></div>
+<p>賣掉自用住宅、2 年內重購自用住宅（先買後賣也可以），已繳的土地增值稅有機會退回。退稅上限的邏輯：<strong>新購土地申報移轉現值 −（原出售申報移轉現值 − 已繳土增稅）</strong>，為正數時最多退到「已繳稅額」全額。輸入三個數字立即估算：</p>
+
+<form class="tool-form" id="rf-form">
+  <div>
+    <label for="rf-paid">已繳土地增值稅（萬元）</label>
+    <input type="number" id="rf-paid" inputmode="decimal" min="0" step="any" placeholder="例：85" required />
+    <span class="hint">不確定？用 <a href="https://calc.zengzhisui.com/">土增稅神器</a> 免費估算</span>
+  </div>
+  <div>
+    <label for="rf-old">原出售土地申報移轉現值（萬元）</label>
+    <input type="number" id="rf-old" inputmode="decimal" min="0" step="any" placeholder="例：600（按公告現值計，非成交價）" required />
+  </div>
+  <div>
+    <label for="rf-new">新購土地申報移轉現值（萬元）</label>
+    <input type="number" id="rf-new" inputmode="decimal" min="0" step="any" placeholder="例：800（按公告現值計，非成交價）" required />
+  </div>
+  <button type="submit">立即估算可退金額</button>
+</form>
+
+<div class="tool-result" id="rf-result">
+  <p style="margin-top:0">估算可退土地增值稅：</p>
+  <p><span class="big" id="rf-amount">—</span></p>
+  <p class="hint" id="rf-note"></p>
+  <p class="hint">本結果為估算；是否符合退稅要件、核准與否及實際金額，由主管稽徵機關依法認定。</p>
+</div>
+
+<h2>先核對五個要件（缺一不可）</h2>
+<ul>
+  <li>✅ 出售與重購的土地都是<strong>自用住宅用地</strong>（本人/配偶/直系親屬設籍、無出租營業）</li>
+  <li>✅ 出售後 <strong>2 年內</strong>重購，或先購後售 2 年內完成（期限起算以完成移轉登記為準）</li>
+  <li>✅ 新購土地地上有房屋，供自用居住</li>
+  <li>✅ 新購申報移轉現值須<strong>高於</strong>「原出售現值 − 已繳土增稅」，才有差額可退</li>
+  <li>⚠️ 退稅後 <strong>5 年內</strong>不得改作其他用途、出租或再移轉，否則<strong>追繳</strong>原退稅款</li>
+</ul>
+
+<h2>常見問題</h2>
+<h3>重購退稅是退「全部」還是退「一部分」？</h3>
+<p>土地增值稅的重購退稅採差額退還邏輯：新購現值填補「原售現值減已納稅額」後仍有餘額時，可退到已納稅額為限。換屋「買貴於賣」的情形，常可全額退回；「買便宜」則可能只退一部分或不能退，實際以稽徵機關核定為準。</p>
+<h3>房地合一稅也有重購退稅嗎？可以一起申請嗎？</h3>
+<p>有。房地合一所得稅另有自住重購退稅（換大屋全額退、換小屋按價額比例退，重購後 5 年內不得改作其他用途或再移轉）。土增稅與房地合一是兩套制度、分別申請，同一次換屋符合要件時兩邊都可辦——很多人只辦到一邊。</p>
+<h3>期限是從簽約日還是過戶日起算？</h3>
+<p>實務以<strong>完成移轉登記日</strong>為準計算 2 年，並非簽約日。時間抓太緊有風險，建議預留登記作業時間；個案認定以稽徵機關為準。</p>
+</article>
+
+<div class="post-cta">
+  <h2>下一步</h2>
+  <p>先用免費土增稅試算算出你已繳/應繳的稅額；「AI 稅務健檢報告」即將上線，可在試算頁登記搶先體驗。</p>
+  <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">加 LINE，接收新工具通知</a>
+  <a class="btn-calc" href="https://calc.zengzhisui.com/">土增稅免費試算 →</a>
+  <a class="btn-calc" style="margin-top:8px;background:var(--surface);color:var(--brand);border:1.5px solid var(--brand)" href="./house-tax.html">房地合一試算 →</a>
+</div>
+<p class="post-disclaimer">本工具為一般性稅務資訊與試算服務，非法律或稅務意見；是否符合退稅要件與實際金額以主管稽徵機關核定為準。留白事務所有限公司｜本公司為顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記、稅務申報、法律文件分別由持照專業人員辦理。</p>
+</div>
+<script src="../line-config.js?v=28"></script>
+<script>
+document.getElementById("rf-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const v = (id) => parseFloat(document.getElementById(id).value) || 0;
+  const paid = v("rf-paid"), oldVal = v("rf-old"), newVal = v("rf-new");
+  const room = newVal - (oldVal - paid);
+  const refund = Math.min(paid, Math.max(0, room));
+  const fmt = (n) => "NT$ " + Math.round(n * 10000).toLocaleString("zh-TW");
+  document.getElementById("rf-amount").textContent = fmt(refund);
+  const note = document.getElementById("rf-note");
+  if (refund <= 0) {
+    note.textContent = "依輸入數字，新購現值未超過「原售現值 − 已繳稅額」，估算無差額可退；請確認兩筆現值皆以申報移轉現值（公告現值）而非成交價填寫。";
+  } else if (refund >= paid) {
+    note.textContent = "估算可退達已繳稅額全額（新購現值足以填補差額）。";
+  } else {
+    note.textContent = "估算可退部分稅額（新購現值僅填補部分差額）。";
+  }
+  document.getElementById("rf-result").style.display = "block";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# 機密：絕不上傳
+automation/
+indexnow_key.txt
+.netlify/
+*.key
+*.pem
+.env*
+
+# 雜項
+node_modules/
+*.zip
+*.bak-*
+extracted/
+web_app/*.bak-*
+.claude/

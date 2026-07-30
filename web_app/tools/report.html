@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>賣房稅務總報告｜土增稅＋房地合一一次算完｜留白事務所</title>
+<meta name="description" content="賣房子到底要繳多少稅？一次算完土地增值稅（自用 vs 一般）與房地合一稅，並檢核重購退稅、自用優惠與長期持有減徵，產出可列印的書面報告。免費、免登入。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/tools/report.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../articles/articles.css" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="賣房稅務總報告｜土增稅＋房地合一一次算完" />
+<meta property="og:description" content="輸入一次資料，同時算出土增稅與房地合一稅，並檢核可能適用的優惠，產出可列印報告。" />
+<meta property="og:url" content="https://calc.zengzhisui.com/tools/report.html" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"賣房稅務總報告","url":"https://calc.zengzhisui.com/tools/report.html","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"publisher":{"@type":"Organization","name":"留白事務所有限公司"}}
+</script>
+<style>
+.rp-form { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:16px 0; }
+.rp-form h3 { margin:0 0 10px; font-size:.95rem; color:var(--brand-ink); border-bottom:1px solid var(--border); padding-bottom:6px; }
+.rp-form + .rp-form { margin-top:14px; }
+.rp-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+@media (max-width:560px){ .rp-row { grid-template-columns:1fr; } }
+.rp-f label { display:block; font-size:.8rem; font-weight:700; color:var(--ink-soft); margin-bottom:4px; }
+.rp-f input[type=number], .rp-f select { width:100%; height:40px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; font-size:.95rem; }
+.rp-f .hint { font-size:.72rem; color:var(--ink-faint); display:block; margin-top:3px; line-height:1.4; }
+.rp-check { display:flex; gap:8px; align-items:flex-start; font-size:.85rem; margin:8px 0; color:var(--ink); }
+.rp-go { width:100%; height:50px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1.05rem; cursor:pointer; margin-top:6px; }
+.rp-report { display:none; border:1px solid var(--border-strong); border-radius:var(--radius); background:var(--surface); padding:22px; margin:18px 0; }
+.rp-head { border-bottom:2px solid var(--brand); padding-bottom:10px; margin-bottom:14px; }
+.rp-head h2 { margin:0; font-size:1.15rem; border:none; padding:0; }
+.rp-head .meta { font-size:.75rem; color:var(--ink-faint); margin-top:4px; }
+.rp-total { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:14px 0; }
+@media (max-width:560px){ .rp-total { grid-template-columns:1fr; } }
+.rp-box { border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; background:var(--surface-2); }
+.rp-box .lbl { font-size:.75rem; color:var(--ink-soft); font-weight:700; }
+.rp-box .val { font-size:1.25rem; font-weight:800; font-variant-numeric:tabular-nums; margin-top:3px; }
+.rp-box.sum { border-color:var(--brand); background:var(--brand-soft); }
+.rp-box.sum .val { color:var(--brand-ink); }
+.rp-table { width:100%; border-collapse:collapse; font-size:.86rem; margin:10px 0; }
+.rp-table th, .rp-table td { border:1px solid var(--border); padding:7px 9px; text-align:left; }
+.rp-table td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+.rp-table thead th { background:var(--surface-2); font-weight:700; }
+.rp-sec { margin-top:18px; }
+.rp-sec h3 { font-size:.98rem; margin:0 0 8px; }
+.rp-list { padding-left:1.2em; margin:0; }
+.rp-list li { margin:.4rem 0; font-size:.88rem; line-height:1.65; }
+.rp-list li.ok::marker { content:"✅ "; }
+.rp-list li.warn::marker { content:"⚠️ "; }
+.rp-list li.info::marker { content:"▫️ "; }
+.rp-act { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+.rp-act button, .rp-act a { flex:1; min-width:150px; height:44px; border-radius:var(--radius-sm); font-weight:700; display:flex; align-items:center; justify-content:center; text-decoration:none; cursor:pointer; }
+.rp-print { border:1.5px solid var(--brand); background:var(--surface); color:var(--brand); }
+.rp-more { border:none; background:var(--brand); color:#fff; }
+.rp-err { color:var(--error); font-size:.85rem; margin-top:8px; }
+@media print {
+  .article-top, .rp-form, .rp-act, .post-cta, .rp-intro { display:none !important; }
+  .rp-report { display:block !important; border:none; padding:0; }
+}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">留白事務所｜土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">土增稅試算 →</a>
+</div>
+
+<article class="post">
+<h1>賣房稅務總報告</h1>
+<div class="post-meta">免費・免登入 ・ 一次算完土增稅＋房地合一 ・ 可列印保存</div>
+<p class="rp-intro">賣一間有土地的房子，通常會同時遇到<strong>兩種稅</strong>：土地部分課<strong>土地增值稅</strong>（依平均地權條例第 33 條、土地稅法第 33、34 條，課的是公告現值的漲價），房地實際獲利部分課<strong>房地合一所得稅</strong>。多數工具只算其中一種，這份報告一次算完，並幫你檢核可能適用的優惠與期限。</p>
+
+<form id="rp-form">
+  <div class="rp-form">
+    <h3>① 土地資料（算土增稅用）</h3>
+    <div class="rp-row">
+      <div class="rp-f"><label for="f-value">公告土地現值（元／㎡）</label><input type="number" id="f-value" min="0" step="any" placeholder="例：80000" required /><span class="hint">謄本或地價證明上的「公告現值」</span></div>
+      <div class="rp-f"><label for="f-org">前次移轉現值（元／㎡）</label><input type="number" id="f-org" min="0" step="any" placeholder="例：20000" required /><span class="hint">上次移轉時的申報現值，非買價</span></div>
+    </div>
+    <div class="rp-row">
+      <div class="rp-f"><label for="f-area">土地面積或持分面積（㎡）</label><input type="number" id="f-area" min="0" step="any" placeholder="例：120" required /></div>
+      <div class="rp-f"><label for="f-type">土地類型</label><select id="f-type"><option value="city">都市土地（自用上限 300㎡）</option><option value="rural">非都市土地（自用上限 700㎡）</option></select></div>
+    </div>
+    <div class="rp-row">
+      <div class="rp-f"><label for="f-year">前次移轉年（民國）</label><input type="number" id="f-year" min="48" max="115" step="1" placeholder="例：90" required /></div>
+      <div class="rp-f"><label for="f-month">前次移轉月</label><input type="number" id="f-month" min="1" max="12" step="1" placeholder="例：6" required /></div>
+    </div>
+    <label class="rp-check"><input type="checkbox" id="f-self" /> <span>符合<strong>自用住宅</strong>要件（地上有房屋、本人或配偶、直系親屬設籍，出售前 1 年未出租或營業）</span></label>
+    <label class="rp-check"><input type="checkbox" id="f-first" /> <span>「一生一次」自用優惠<strong>尚未使用過</strong></span></label>
+  </div>
+
+  <div class="rp-form">
+    <h3>② 房地交易資料（算房地合一用，選填）</h3>
+    <div class="rp-row">
+      <div class="rp-f"><label for="f-sale">成交價（萬元）</label><input type="number" id="f-sale" min="0" step="any" placeholder="例：1500" /><span class="hint">留空則只算土增稅</span></div>
+      <div class="rp-f"><label for="f-cost">取得成本（萬元）</label><input type="number" id="f-cost" min="0" step="any" placeholder="例：1000" /><span class="hint">繼承取得＝繼承時房屋評定現值＋公告土地現值</span></div>
+    </div>
+    <div class="rp-row">
+      <div class="rp-f"><label for="f-exp">相關費用（萬元）</label><input type="number" id="f-exp" min="0" step="any" value="0" /><span class="hint">仲介費、代書費、契稅等憑證費用</span></div>
+      <div class="rp-f"><label for="f-hold">房地持有年數</label><input type="number" id="f-hold" min="0" step="any" placeholder="例：8" /><span class="hint">繼承取得可併計被繼承人持有期間</span></div>
+    </div>
+    <label class="rp-check"><input type="checkbox" id="f-six" /> <span>符合<strong>自住輕稅</strong>（設籍並持有、居住連續滿 6 年，前 6 年未出租營業）</span></label>
+    <label class="rp-check"><input type="checkbox" id="f-nonres" /> <span>出售者為<strong>非中華民國境內居住者</strong>（海外身分，無自住優惠）</span></label>
+  </div>
+
+  <div class="rp-form">
+    <h3>③ 換屋計畫（檢核重購退稅，選填）</h3>
+    <div class="rp-row">
+      <div class="rp-f"><label for="f-remonths">賣舊與買新相隔幾個月</label><input type="number" id="f-remonths" min="0" step="any" placeholder="例：8；沒有換屋請留空" /></div>
+      <div class="rp-f"><label for="f-newvalue">新購土地申報移轉現值（萬元）</label><input type="number" id="f-newvalue" min="0" step="any" placeholder="例：800" /></div>
+    </div>
+  </div>
+
+  <div id="rp-err" class="rp-err" hidden></div>
+  <button type="submit" class="rp-go">產出我的賣房稅務報告</button>
+</form>
+
+<div class="rp-report" id="rp-report"></div>
+</article>
+
+<div class="post-cta">
+  <h2>想更完整地檢視？</h2>
+  <p>這份報告涵蓋土增稅與房地合一的估算與優惠檢核。若你的情況涉及繼承、農地或多筆土地，可再用其他免費工具交叉確認。土地登記、稅務申報屬地政士／記帳士／會計師之業務，如需辦理請洽持照專業人員。</p>
+  <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">加 LINE，接收新工具通知</a>
+  <a class="btn-calc" href="./checkup.html">30 秒稅務健檢（賣地／換屋／繼承）→</a>
+  <a class="btn-calc" style="margin-top:8px;background:var(--surface);color:var(--brand);border:1.5px solid var(--brand)" href="./estate-tax.html">遺產稅試算 →</a>
+</div>
+<p class="post-disclaimer">本報告為一般性稅務資訊與試算服務，依你輸入的假設資料估算，非法律或稅務意見，亦非任何優惠適用之保證；實際稅額與適用要件以主管稽徵機關核定為準。留白事務所有限公司｜顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記、稅務申報、法律文件分別由持照專業人員辦理。</p>
+</div>
+<script src="../line-config.js"></script>
+<script type="module">
+import { calculateLVIT, formatTWD } from "../calc.js";
+
+const $ = (id) => document.getElementById(id);
+const num = (id) => parseFloat($(id).value) || 0;
+const W = (n) => formatTWD(Math.round(n));          // 元
+const WW = (man) => formatTWD(Math.round(man * 10000)); // 萬元 → 元
+
+$("rp-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const err = $("rp-err");
+  err.hidden = true;
+
+  // ── 土增稅 ──
+  let lvit;
+  try {
+    lvit = calculateLVIT({
+      landValue: num("f-value"),
+      landOrgValue: num("f-org"),
+      landArea: num("f-area"),
+      landYear: parseInt($("f-year").value, 10),
+      landMonth: parseInt($("f-month").value, 10),
+      landNumerator: 1,
+      landDenominator: 1,
+      isCity: $("f-type").value === "city",
+      targetDate: new Date(),
+    });
+  } catch (ex) {
+    err.textContent = "土地資料有誤：" + ex.message;
+    err.hidden = false;
+    return;
+  }
+
+  const selfUse = $("f-self").checked;
+  const firstTime = $("f-first").checked;
+  const applyLvit = selfUse && firstTime ? lvit.landTaxValueSELF : lvit.landTaxValueNORMAL;
+  const lvitSaving = lvit.landTaxValueNORMAL - lvit.landTaxValueSELF;
+
+  // ── 房地合一 ──
+  const sale = num("f-sale"), cost = num("f-cost"), exp = num("f-exp"), hold = num("f-hold");
+  const six = $("f-six").checked, nonRes = $("f-nonres").checked;
+  let hasHT = sale > 0;
+  let htTax = 0, htRate = "", htIncome = 0;
+  if (hasHT) {
+    // 課稅所得 = 成交 − 成本 − 費用 − 土增稅漲價總數額（萬元為單位）
+    htIncome = Math.max(0, sale - cost - exp - lvit.landTotalValue / 10000);
+    if (nonRes) {
+      if (hold <= 2) { htTax = htIncome * 0.45; htRate = "45%（非居住者，持有 ≤2 年）"; }
+      else { htTax = htIncome * 0.35; htRate = "35%（非居住者，持有 >2 年）"; }
+    } else if (six && hold >= 6) {
+      htTax = Math.max(0, htIncome - 400) * 0.10;
+      htRate = "自住優惠：免稅額 400 萬＋超過部分 10%";
+    } else if (hold <= 2) { htTax = htIncome * 0.45; htRate = "45%（持有 2 年以內）"; }
+    else if (hold <= 5) { htTax = htIncome * 0.35; htRate = "35%（逾 2～5 年）"; }
+    else if (hold <= 10) { htTax = htIncome * 0.20; htRate = "20%（逾 5～10 年）"; }
+    else { htTax = htIncome * 0.15; htRate = "15%（逾 10 年）"; }
+  }
+
+  // ── 重購退稅 ──
+  const reMonths = parseFloat($("f-remonths").value);
+  const newVal = num("f-newvalue");
+  let refund = null;
+  if (!isNaN(reMonths) && newVal > 0) {
+    const oldVal = lvit.landTransferValue / 10000;      // 萬元
+    const paid = applyLvit / 10000;                      // 萬元
+    const room = newVal - (oldVal - paid);
+    refund = { months: reMonths, amount: Math.min(paid, Math.max(0, room)) * 10000, inTime: reMonths <= 24 };
+  }
+
+  const totalTax = applyLvit + htTax * 10000;
+
+  // ── 產出報告 ──
+  const rows = [];
+  rows.push(["土地漲價總數額 a", W(lvit.landTotalValue)]);
+  rows.push(["漲價倍數", lvit.landMultiple.toFixed(3)]);
+  rows.push(["持有年限（土地）", lvit.landHoldYear.toFixed(2) + " 年"]);
+  rows.push(["按一般用地稅率", W(lvit.landTaxValueNORMAL)]);
+  rows.push(["按自用住宅 10%", W(lvit.landTaxValueSELF)]);
+
+  const checks = [];
+  if (selfUse && firstTime) checks.push(["ok", `符合自用住宅且一生一次未用過，本報告以 <strong>10% 稅率</strong>估算，較一般稅率少約 <strong>${W(lvitSaving)}</strong>。面積上限：都市 300㎡／非都市 700㎡，超過部分仍按一般稅率。`]);
+  else if (selfUse && !firstTime) checks.push(["warn", `已用過一生一次，可確認是否符合「<strong>一生一屋</strong>」（設籍並持有連續滿 6 年、前 5 年未出租營業，面積都市 150㎡／非都市 350㎡）。若符合同樣適用 10%，估算可差約 ${W(lvitSaving)}。`]);
+  else checks.push(["warn", `未勾選自用住宅要件，本報告以<strong>一般用地稅率</strong>估算。若實際符合自用（設籍、無出租營業、地上有房屋），估算可少約 <strong>${W(lvitSaving)}</strong>——值得逐項確認。`]);
+
+  if (lvit.landHoldYear >= 40) checks.push(["ok", "持有滿 40 年：超過最低稅率 20% 的部分減徵 40%（自動適用，已含在計算中）。"]);
+  else if (lvit.landHoldYear >= 30) checks.push(["ok", "持有滿 30 年：超過最低稅率 20% 的部分減徵 30%（自動適用）。"]);
+  else if (lvit.landHoldYear >= 20) checks.push(["ok", "持有滿 20 年：超過最低稅率 20% 的部分減徵 20%（自動適用）。"]);
+  else checks.push(["info", `持有 ${lvit.landHoldYear.toFixed(1)} 年，尚未達 20 年長期持有減徵門檻。`]);
+
+  if (lvit.isOver) checks.push(["warn", `土地面積<strong>超過自用住宅上限</strong>（${lvit.selfLimit}㎡），超出部分已按一般稅率分段計算。`]);
+
+  if (hasHT) {
+    checks.push(["info", `房地合一課稅所得已減除土增稅漲價總數額 ${W(lvit.landTotalValue)}（避免重複課稅）。`]);
+    if (htIncome <= 0) {
+      checks.push(["ok", `<strong>估算無房地合一稅</strong>：成交價扣除取得成本、費用與土地漲價總數額後已無餘額（課稅所得為 0）。這是因為土地漲價部分已課土增稅，可自房地合一所得中減除。是否確實無所得，仍以稽徵機關依實際憑證核定為準。`]);
+    }
+    if (nonRes) checks.push(["warn", "非居住者稅率固定 45%／35%，且<strong>不適用</strong>自住 400 萬免稅與重購退稅——「由誰出面賣」會大幅影響稅負。"]);
+    else if (six && hold >= 6) checks.push(["ok", "符合自住輕稅：免稅額 400 萬、超過部分 10%。"]);
+    else if (six && hold < 6) checks.push(["warn", "已勾自住但持有未滿 6 年，尚不符自住輕稅要件。"]);
+  } else {
+    checks.push(["info", "未填成交價，本報告僅估算土地增值稅；若有房屋一併出售，房地合一稅需另行評估。"]);
+  }
+
+  if (refund) {
+    if (!refund.inTime) checks.push(["warn", `賣舊買新已相隔 ${refund.months} 個月，<strong>超過 2 年期限</strong>，土增稅重購退稅原則上無法申請。`]);
+    else if (refund.amount > 0) checks.push(["ok", `在 2 年期限內，估算<strong>可退土增稅約 ${W(refund.amount)}</strong>。退稅後 5 年內不得改作他用、出租或再移轉，否則會被追繳。`]);
+    else checks.push(["warn", "新購現值未超過「原售現值 − 已納稅額」，估算無差額可退；請確認兩筆現值皆填申報移轉現值而非成交價。"]);
+  }
+
+  const todos = [
+    ["info", "<strong>本週</strong>：調土地登記謄本與地價證明，核對公告現值、前次移轉現值、面積與持分是否與本報告輸入一致。"],
+    ["warn", "<strong>訂約後 30 日內</strong>：申報土地移轉現值（逾期可能改按受理日當期現值計算）。"],
+    ["warn", "<strong>自用住宅優惠須主動申請</strong>：於申報時一併提出，不會自動適用。"],
+    ["info", "<strong>稅單送達後 30 日內</strong>繳納，逾期每逾 3 日加徵 1% 滯納金（上限 10%）；未完稅無法辦移轉登記。"],
+  ];
+  if (hasHT && !nonRes) todos.push(["info", "<strong>移轉登記次日起 30 日內</strong>申報房地合一所得稅。"]);
+  if (refund && refund.inTime) todos.push(["ok", "備妥新舊屋設籍與現值文件，於期限內申請重購退稅。"]);
+
+  $("rp-report").innerHTML = `
+    <div class="rp-head">
+      <h2>📋 賣房稅務總報告</h2>
+      <div class="meta">產出日期：${new Date().toLocaleDateString("zh-TW")}　·　依你輸入之假設資料估算，實際稅額以主管稽徵機關核定為準</div>
+    </div>
+    <div class="rp-total">
+      <div class="rp-box"><div class="lbl">土地增值稅（估算）</div><div class="val">${W(applyLvit)}</div></div>
+      <div class="rp-box"><div class="lbl">房地合一稅（估算）</div><div class="val">${hasHT ? WW(htTax) : "—"}</div></div>
+      <div class="rp-box sum"><div class="lbl">合計稅負（估算）</div><div class="val">${W(totalTax)}</div></div>
+    </div>
+
+    <div class="rp-sec">
+      <h3>土地增值稅明細</h3>
+      <table class="rp-table"><tbody>
+        ${rows.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}
+      </tbody></table>
+    </div>
+
+    ${hasHT ? `
+    <div class="rp-sec">
+      <h3>房地合一稅明細</h3>
+      <table class="rp-table"><tbody>
+        <tr><td>成交價</td><td>${WW(sale)}</td></tr>
+        <tr><td>減：取得成本</td><td>−${WW(cost)}</td></tr>
+        <tr><td>減：相關費用</td><td>−${WW(exp)}</td></tr>
+        <tr><td>減：土地漲價總數額</td><td>−${W(lvit.landTotalValue)}</td></tr>
+        <tr><td><strong>課稅所得</strong></td><td><strong>${WW(htIncome)}</strong></td></tr>
+        <tr><td>適用稅率</td><td>${htIncome > 0 ? htRate : htRate + "（課稅所得為 0，估算不生稅額）"}</td></tr>
+      </tbody></table>
+    </div>` : ""}
+
+    <div class="rp-sec">
+      <h3>優惠與風險檢核</h3>
+      <ul class="rp-list">${checks.map((c) => `<li class="${c[0]}">${c[1]}</li>`).join("")}</ul>
+    </div>
+
+    <div class="rp-sec">
+      <h3>接下來該做的事</h3>
+      <ul class="rp-list">${todos.map((t) => `<li class="${t[0]}">${t[1]}</li>`).join("")}</ul>
+    </div>
+
+    <div class="rp-sec">
+      <p style="font-size:.75rem;color:var(--ink-faint);line-height:1.6;margin:0">
+        計算依據：平均地權條例第 33 條、土地稅法第 31、33、34、35 條、所得稅法房地合一相關規定。本報告為資訊與試算服務，非稅務簽證或法律意見；是否符合各項優惠要件以稽徵機關認定為準；土地登記與稅務申報由地政士、記帳士或會計師等具名專業人員辦理。
+      </p>
+    </div>
+
+    <div class="rp-act">
+      <button class="rp-print" onclick="window.print()">🖨️ 列印／存成 PDF</button>
+      <a class="rp-more" href="https://calc.zengzhisui.com/">回土增稅試算 →</a>
+    </div>`;
+  $("rp-report").style.display = "block";
+  $("rp-report").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+</script>
+</body>
+</html>

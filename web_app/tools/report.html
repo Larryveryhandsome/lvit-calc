@@ -46,6 +46,12 @@
 .rp-table thead th { background:var(--surface-2); font-weight:700; }
 .rp-sec { margin-top:18px; }
 .rp-sec h3 { font-size:.98rem; margin:0 0 8px; }
+.rp-next { border:1.5px solid var(--brand); border-radius:var(--radius); background:color-mix(in srgb, var(--brand) 6%, var(--surface)); padding:16px 18px; margin:18px 0 0; }
+.rp-next strong { display:block; font-size:.95rem; color:var(--brand); margin-bottom:6px; }
+.rp-next p { font-size:.84rem; line-height:1.7; color:var(--ink-soft); margin:0 0 12px; }
+.rp-line { display:inline-flex; align-items:center; gap:6px; background:#06C755; color:#fff; font-weight:700; font-size:.86rem; padding:9px 16px; border-radius:999px; text-decoration:none; }
+.rp-line:hover { filter:brightness(1.06); text-decoration:none; }
+@media print { .rp-next, .rp-act { display:none !important; } }
 .rp-list { padding-left:1.2em; margin:0; }
 .rp-list li { margin:.4rem 0; font-size:.88rem; line-height:1.65; }
 .rp-list li.ok::marker { content:"✅ "; }
@@ -296,6 +302,12 @@ $("rp-form").addEventListener("submit", (e) => {
       <p style="font-size:.75rem;color:var(--ink-faint);line-height:1.6;margin:0">
         計算依據：平均地權條例第 33 條、土地稅法第 31、33、34、35 條、所得稅法房地合一相關規定。本報告為資訊與試算服務，非稅務簽證或法律意見；是否符合各項優惠要件以稽徵機關認定為準；土地登記與稅務申報由地政士、記帳士或會計師等具名專業人員辦理。
       </p>
+    </div>
+
+    <div class="rp-next">
+      <strong>這份估算是起點，不是結論。</strong>
+      <p>實際稅額會因<strong>面積、持分、設籍狀況、費用單據是否齊全</strong>而不同，其中任一項的差異都可能是數十萬的落差。建議把這份報告列印下來，逐項核對你的土地登記謄本與地價證明；申報與登記請洽地政士辦理。</p>
+      ${window.LVIT_LINE_URL ? `<a class="rp-line" href="${window.LVIT_LINE_URL}" target="_blank" rel="noopener">有看不懂的欄位？加 LINE 問 →</a>` : ""}
     </div>
 
     <div class="rp-act">

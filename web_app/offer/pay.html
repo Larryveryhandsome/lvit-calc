@@ -29,6 +29,21 @@
 .py-form-btn:hover { filter:brightness(1.07); text-decoration:none; }
 .py-consent { border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:14px 16px; background:var(--surface-2); margin:16px 0; font-size:.82rem; line-height:1.8; color:var(--ink-soft); }
 .py-consent strong { color:var(--ink); }
+.od-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+@media (max-width:560px){ .od-grid { grid-template-columns:1fr; } }
+.od-f label { display:block; font-size:.8rem; font-weight:700; color:var(--ink-soft); margin-bottom:4px; }
+.od-f label em { color:var(--error, #d33); font-style:normal; }
+.od-f input, .od-f select, .od-f textarea { width:100%; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; font-size:.95rem; font-family:inherit; }
+.od-f input, .od-f select { height:40px; }
+.od-f textarea { padding:9px 10px; line-height:1.6; resize:vertical; }
+.od-sub { font-size:.85rem; color:var(--brand-ink); margin:16px 0 8px; padding-bottom:5px; border-bottom:1px solid var(--border); }
+.od-check { display:flex; gap:9px; align-items:flex-start; font-size:.78rem; line-height:1.7; color:var(--ink-soft); margin:16px 0; }
+.od-check input { margin-top:3px; flex-shrink:0; }
+.od-submit { width:100%; height:50px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1.02rem; cursor:pointer; }
+.od-submit:disabled { opacity:.55; cursor:not-allowed; }
+.od-msg { font-size:.88rem; line-height:1.7; margin-top:12px; padding:12px 14px; border-radius:var(--radius-sm); }
+.od-msg.ok { background:color-mix(in srgb, var(--brand) 10%, var(--surface)); border:1.5px solid var(--brand); color:var(--ink); }
+.od-msg.err { background:color-mix(in srgb, #d33 8%, var(--surface)); border:1px solid #d33; color:var(--ink); }
 </style>
 </head>
 <body>
@@ -67,15 +82,45 @@
 
 <div class="py-step">
   <h3><span class="no">2</span>填寫案件資料</h3>
-  <p>匯款後請填寫訂購表單，內容包含：</p>
-  <ul>
-    <li>匯款帳號<strong>末五碼</strong>（用於核對款項）</li>
-    <li>聯絡用電子郵件</li>
-    <li>發票抬頭與統一編號（需要三聯式發票時填寫）</li>
-    <li>案件資料：公告土地現值、前次移轉現值、面積或持分面積、前次移轉年月、是否為都市土地；若要一併計算房地合一，再加上預計成交價、取得成本與相關費用</li>
-  </ul>
-  <a class="py-form-btn js-pay-form" href="#" hidden target="_blank" rel="noopener">前往填寫表單 →</a>
-  <p class="js-pay-pending" hidden style="margin-top:10px">表單開放前，請直接透過 LINE 提供上述資料。</p>
+  <p>匯款後請填寫以下資料，我們會核對款項並開始製作報告。</p>
+
+  <form id="od-form" novalidate>
+    <div class="od-grid">
+      <div class="od-f"><label for="od-last5">匯款帳號末五碼 <em>*</em></label><input type="text" id="od-last5" inputmode="numeric" maxlength="5" placeholder="12345" required /></div>
+      <div class="od-f"><label for="od-contact">聯絡方式（Email 或 LINE ID） <em>*</em></label><input type="text" id="od-contact" placeholder="you@example.com" required /></div>
+    </div>
+    <div class="od-grid">
+      <div class="od-f"><label for="od-invoice">發票抬頭（選填）</label><input type="text" id="od-invoice" placeholder="公司名稱，個人可留空" /></div>
+      <div class="od-f"><label for="od-taxid">發票統一編號（選填）</label><input type="text" id="od-taxid" inputmode="numeric" maxlength="8" placeholder="8 碼" /></div>
+    </div>
+
+    <h4 class="od-sub">土地資料</h4>
+    <div class="od-grid">
+      <div class="od-f"><label for="od-value">公告土地現值（元／㎡）</label><input type="number" id="od-value" min="0" step="any" placeholder="80000" /></div>
+      <div class="od-f"><label for="od-org">前次移轉現值（元／㎡）</label><input type="number" id="od-org" min="0" step="any" placeholder="20000" /></div>
+    </div>
+    <div class="od-grid">
+      <div class="od-f"><label for="od-area">面積或持分面積（㎡）</label><input type="number" id="od-area" min="0" step="any" placeholder="120" /></div>
+      <div class="od-f"><label for="od-when">前次移轉年月（民國）</label><input type="text" id="od-when" placeholder="90 年 6 月" /></div>
+    </div>
+    <div class="od-grid">
+      <div class="od-f"><label for="od-urban">土地類型</label><select id="od-urban"><option value="都市土地">都市土地</option><option value="非都市土地">非都市土地</option><option value="不確定">不確定</option></select></div>
+      <div class="od-f"><label for="od-self">是否符合自用住宅要件</label><select id="od-self"><option value="不確定">不確定</option><option value="是">是</option><option value="否">否</option></select></div>
+    </div>
+
+    <h4 class="od-sub">房地交易（要一併算房地合一才需填）</h4>
+    <div class="od-grid">
+      <div class="od-f"><label for="od-sale">預計成交價（萬元）</label><input type="number" id="od-sale" min="0" step="any" placeholder="1500" /></div>
+      <div class="od-f"><label for="od-cost">取得成本（萬元）</label><input type="number" id="od-cost" min="0" step="any" placeholder="1000" /></div>
+    </div>
+
+    <div class="od-f" style="margin-top:12px"><label for="od-note">其他想說明的情況（選填）</label><textarea id="od-note" rows="3" placeholder="例如：兄弟三人共有、繼承取得、正在考慮換屋"></textarea></div>
+
+    <label class="od-check"><input type="checkbox" id="od-agree" required /> <span>我已閱讀並同意<a href="../legal/terms.html" target="_blank">服務條款</a>與<a href="../legal/refund.html" target="_blank">退款政策</a>，並瞭解本商品為<strong>非以有形媒介提供之數位內容</strong>，依《通訊交易解除權合理例外情事適用準則》第 2 條第 5 款，經本人同意後提供者不適用七日無條件解除權（報告尚未產出前仍可全額退款）。</span></label>
+
+    <button type="submit" class="od-submit" id="od-btn">送出訂購資料</button>
+    <p class="od-msg" id="od-msg" hidden></p>
+  </form>
 </div>
 
 <div class="py-step">
@@ -104,5 +149,71 @@
 </div>
 <script src="../line-config.js"></script>
 <script src="../pay-config.js"></script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const form = $("od-form"), btn = $("od-btn"), msg = $("od-msg");
+  if (!form) return;
+
+  const say = (text, kind) => {
+    msg.hidden = false;
+    msg.className = "od-msg " + kind;
+    msg.innerHTML = text;
+    msg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const last5 = $("od-last5").value.trim();
+    const contact = $("od-contact").value.trim();
+
+    if (!/^\d{5}$/.test(last5)) return say("請填寫匯款帳號的<strong>末五碼</strong>（5 個數字）。", "err");
+    if (!contact) return say("請留下 Email 或 LINE ID，否則我們無法把報告交給您。", "err");
+    if (!$("od-agree").checked) return say("請先閱讀並勾選同意服務條款與退款政策。", "err");
+
+    const payload = {
+      last5, contact,
+      invoice: $("od-invoice").value.trim(),
+      taxId: $("od-taxid").value.trim(),
+      value: $("od-value").value.trim(),
+      org: $("od-org").value.trim(),
+      area: $("od-area").value.trim(),
+      when: $("od-when").value.trim(),
+      urban: $("od-urban").value,
+      selfUse: $("od-self").value,
+      sale: $("od-sale").value.trim(),
+      cost: $("od-cost").value.trim(),
+      note: $("od-note").value.trim(),
+      product: "個案土地稅負情境對照報告",
+      amount: "2000",
+    };
+
+    btn.disabled = true;
+    btn.textContent = "送出中…";
+    try {
+      const r = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) throw new Error(j.error || "送出失敗");
+      form.querySelectorAll("input, select, textarea").forEach((el) => { el.disabled = true; });
+      btn.textContent = "已送出";
+      const line = window.LVIT_LINE_URL
+        ? `<br />若 24 小時內未收到回覆，請透過 <a href="${window.LVIT_LINE_URL}" target="_blank" rel="noopener">LINE 官方帳號</a>聯繫我們並提供訂單編號。`
+        : "";
+      say(`<strong>已收到您的訂購資料。</strong><br />訂單編號：<strong>${j.id}</strong>（請截圖保存）<br />我們會核對款項後開始製作報告，並以您留的聯絡方式通知您專屬查詢網址。${line}`, "ok");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "送出訂購資料";
+      const line = window.LVIT_LINE_URL
+        ? `請改用 <a href="${window.LVIT_LINE_URL}" target="_blank" rel="noopener">LINE 官方帳號</a>與我們聯繫，我們會協助您完成。`
+        : "請稍後再試。";
+      say(`送出時發生問題（${err.message}）。${line}`, "err");
+    }
+  });
+})();
+</script>
 </body>
 </html>

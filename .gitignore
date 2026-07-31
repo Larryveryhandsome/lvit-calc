@@ -6,6 +6,11 @@ indexnow_key.txt
 *.pem
 .env*
 
+# 客戶個資：訂單含 Email 與匯款帳號末五碼，repo 是公開的
+orders.jsonl
+orders*.jsonl
+*.orders.json
+
 # 雜項
 node_modules/
 *.zip

@@ -1340,3 +1340,13 @@ details.advanced .field { margin-top: 12px; }
   padding: 2px 7px; border-radius: 999px;
 }
 .tool-card { position: relative; }
+
+/* ── 表單欄位字級下限 ─────────────────────────────
+   iOS Safari 在 input 字級 < 16px 時，使用者一點擊就會自動放大整個頁面，
+   版面跟著跑掉，在付款與名單表單上直接殺掉轉換。
+   設為全域預設，避免個別頁面再度遺漏；頁面內嵌樣式仍可覆蓋（但不得低於 16px）。 */
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+select,
+textarea {
+  font-size: 16px;
+}

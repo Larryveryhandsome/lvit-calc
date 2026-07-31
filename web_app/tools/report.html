@@ -7,8 +7,8 @@
 <meta name="description" content="賣房子到底要繳多少稅？一次算完土地增值稅（自用 vs 一般）與房地合一稅，並檢核重購退稅、自用優惠與長期持有減徵，產出可列印的書面報告。免費、免登入。" />
 <link rel="canonical" href="https://calc.zengzhisui.com/tools/report.html" />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-<link rel="stylesheet" href="../styles.css" />
-<link rel="stylesheet" href="../articles/articles.css" />
+<link rel="stylesheet" href="../styles.css?v=30" />
+<link rel="stylesheet" href="../articles/articles.css?v=30" />
 <script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta property="og:type" content="website" />
 <meta property="og:title" content="賣房稅務總報告｜土增稅＋房地合一一次算完" />
@@ -25,7 +25,7 @@
 .rp-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
 @media (max-width:560px){ .rp-row { grid-template-columns:1fr; } }
 .rp-f label { display:block; font-size:.8rem; font-weight:700; color:var(--ink-soft); margin-bottom:4px; }
-.rp-f input[type=number], .rp-f select { width:100%; height:40px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; font-size:.95rem; }
+.rp-f input[type=number], .rp-f select { width:100%; height:40px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; font-size:16px; }
 .rp-f .hint { font-size:.72rem; color:var(--ink-faint); display:block; margin-top:3px; line-height:1.4; }
 .rp-check { display:flex; gap:8px; align-items:flex-start; font-size:.85rem; margin:8px 0; color:var(--ink); }
 .rp-go { width:100%; height:50px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1.05rem; cursor:pointer; margin-top:6px; }
@@ -138,9 +138,9 @@
 </div>
 <p class="post-disclaimer">本報告為一般性稅務資訊與試算服務，依你輸入的假設資料估算，非法律或稅務意見，亦非任何優惠適用之保證；實際稅額與適用要件以主管稽徵機關核定為準。留白創研有限公司｜顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記、稅務申報、法律文件分別由持照專業人員辦理。</p>
 </div>
-<script src="../line-config.js"></script>
+<script src="../line-config.js?v=30"></script>
 <script type="module">
-import { calculateLVIT, formatTWD } from "../calc.js";
+import { calculateLVIT, formatTWD } from "../calc.js?v=30";
 
 const $ = (id) => document.getElementById(id);
 const num = (id) => parseFloat($(id).value) || 0;

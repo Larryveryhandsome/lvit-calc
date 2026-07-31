@@ -1,9 +1,10 @@
 // 極簡離線快取 — 首次瀏覽後可完全離線使用
-const CACHE = "lvit-v29";
+const CACHE = "lvit-v30";
 
 // 爬蟲檔案永遠不經過快取：若站台真的掛了必須讓它明確失敗，
 // 不能回傳快取的 HTML 把問題蓋掉（2026-07 曾因此讓 DNS 中斷數日未被發現）。
-const NEVER_CACHE = /^\/(robots\.txt|sitemap\.xml|ads\.txt|.*\.well-known\/.*)$/;
+// 付款頁與收款設定同樣絕不快取：離線回放一組過期的帳號或金額會造成真實的資金錯誤。
+const NEVER_CACHE = /^\/(robots\.txt|sitemap\.xml|ads\.txt|pay-config\.js|offer\/pay\.html|.*\.well-known\/.*)$/;
 
 // 離線 fallback 時注入橫幅，讓使用者知道看到的不是即時內容
 const OFFLINE_BANNER = `<div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#b45309;color:#fff;padding:8px 14px;font:600 13px/1.5 system-ui,sans-serif;text-align:center">

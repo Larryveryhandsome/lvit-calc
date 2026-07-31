@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>訂購與付款｜個案土地稅負情境對照報告 - 土增稅神器</title>
+<meta name="description" content="訂購個案土地稅負情境對照報告的付款與資料填寫方式。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/offer/pay.html" />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../articles/articles.css" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+.py-step { border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:16px 18px; margin:14px 0; }
+.py-step .no { display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:var(--brand); color:#fff; font-weight:800; font-size:.82rem; margin-right:8px; }
+.py-step h3 { display:flex; align-items:center; font-size:.98rem; margin:0 0 10px; }
+.py-step p, .py-step li { font-size:.85rem; line-height:1.75; color:var(--ink-soft); }
+.py-bank { border:1.5px solid var(--brand); border-radius:var(--radius-sm); background:color-mix(in srgb, var(--brand) 6%, var(--surface)); padding:14px 16px; margin:10px 0; }
+.py-bank dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:7px 14px; font-size:.9rem; }
+.py-bank dt { font-weight:700; color:var(--ink-soft); }
+.py-bank dd { margin:0; font-variant-numeric:tabular-nums; font-weight:700; color:var(--ink); }
+.py-amount { font-size:1.5rem; font-weight:800; color:var(--brand-ink); font-variant-numeric:tabular-nums; }
+.py-pending { border:1.5px dashed var(--border-strong); border-radius:var(--radius-sm); padding:16px; background:var(--surface-2); text-align:center; }
+.py-pending p { margin:0 0 12px; font-size:.88rem; color:var(--ink-soft); line-height:1.75; }
+.btn-line { display:inline-flex; align-items:center; gap:6px; background:#06C755; color:#fff; font-weight:700; font-size:.9rem; padding:11px 22px; border-radius:999px; text-decoration:none; }
+.btn-line:hover { filter:brightness(1.06); text-decoration:none; }
+.py-form-btn { display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 28px; border-radius:999px; background:var(--brand); color:#fff; font-weight:800; text-decoration:none; margin-top:8px; }
+.py-form-btn:hover { filter:brightness(1.07); text-decoration:none; }
+.py-consent { border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:14px 16px; background:var(--surface-2); margin:16px 0; font-size:.82rem; line-height:1.8; color:var(--ink-soft); }
+.py-consent strong { color:var(--ink); }
+</style>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">土增稅神器</a>
+  <a class="to-calc" href="../offer/">商品說明 →</a>
+</div>
+
+<article class="post">
+<h1>訂購與付款</h1>
+<div class="post-meta">個案土地稅負情境對照報告 ・ NT$2,000 ／ 案</div>
+
+<div class="py-step">
+  <h3><span class="no">1</span>匯款</h3>
+
+  <div class="js-pay-ready" hidden>
+    <div class="py-bank">
+      <dl>
+        <dt>銀行</dt><dd class="js-pay-bank"></dd>
+        <dt>分行</dt><dd class="js-pay-branch"></dd>
+        <dt>帳號</dt><dd class="js-pay-account"></dd>
+        <dt>戶名</dt><dd class="js-pay-holder"></dd>
+        <dt>統一編號</dt><dd class="js-pay-taxid"></dd>
+      </dl>
+    </div>
+    <p>金額：<span class="py-amount">NT$ 2,000</span></p>
+    <p>請保留您的匯款紀錄，下一步需要填寫<strong>帳號末五碼</strong>供核對。</p>
+  </div>
+
+  <div class="js-pay-pending py-pending">
+    <p><strong>線上匯款資訊設定中。</strong><br />目前請透過 LINE 官方帳號洽詢訂購，我們會提供收款資訊並協助您完成。</p>
+    <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">用 LINE 洽詢訂購</a>
+  </div>
+</div>
+
+<div class="py-step">
+  <h3><span class="no">2</span>填寫案件資料</h3>
+  <p>匯款後請填寫訂購表單，內容包含：</p>
+  <ul>
+    <li>匯款帳號<strong>末五碼</strong>（用於核對款項）</li>
+    <li>聯絡用電子郵件</li>
+    <li>發票抬頭與統一編號（需要三聯式發票時填寫）</li>
+    <li>案件資料：公告土地現值、前次移轉現值、面積或持分面積、前次移轉年月、是否為都市土地；若要一併計算房地合一，再加上預計成交價、取得成本與相關費用</li>
+  </ul>
+  <a class="py-form-btn js-pay-form" href="#" hidden target="_blank" rel="noopener">前往填寫表單 →</a>
+  <p class="js-pay-pending" hidden style="margin-top:10px">表單開放前，請直接透過 LINE 提供上述資料。</p>
+</div>
+
+<div class="py-step">
+  <h3><span class="no">3</span>取得報告</h3>
+  <p>款項與資料確認後，我們會產出您的專屬報告，並提供一組<strong>專屬查詢網址</strong>。該網址可永久查看、可列印 A4，30 天內可變更參數重新產出共 3 次。</p>
+  <p>若您提供的資料需要補充，我們會透過您留的聯絡方式詢問。</p>
+</div>
+
+<div class="py-consent">
+  <strong>訂購前請確認以下事項（表單中需勾選同意）：</strong>
+  <ol style="padding-left:1.3em;margin:8px 0 0">
+    <li>本商品為<strong>非以有形媒介提供之數位內容</strong>，依《消費者保護法》第 19 條第 2 項及《通訊交易解除權合理例外情事適用準則》第 2 條第 5 款，經您事先同意後提供者，<strong>不適用七日無條件解除權</strong>。報告尚未產出前仍可全額退款，詳見<a href="../legal/refund.html">退款政策</a>。</li>
+    <li>本報告為<strong>試算與資訊整理</strong>，非稅務簽證或法律意見。實際稅額與各項優惠適用要件，一律以主管稽徵機關核定為準。</li>
+    <li>本公司<strong>不代辦、不代理申報、不代收稅款</strong>。土地登記與稅務申報請洽您委任之執業地政士、記帳士或會計師辦理。</li>
+    <li>計算結果之正確性以您所提供之數據為基礎；數據有誤所致之結果不構成退款事由。</li>
+  </ol>
+</div>
+
+<p style="font-size:.78rem;line-height:1.8;color:var(--ink-soft);border-top:1px solid var(--border);padding-top:14px">
+留白創研有限公司｜統一編號 00018173｜宜蘭縣宜蘭市新東里陽明三路 65 號 1 樓<br />
+本公司為顧問服務業者，非地政士／會計師／記帳士／律師事務所。<br />
+<a href="../legal/terms.html">服務條款</a>　<a href="../legal/privacy.html">隱私權政策</a>　<a href="../legal/refund.html">退款政策</a>
+</p>
+
+</article>
+</div>
+<script src="../line-config.js"></script>
+<script src="../pay-config.js"></script>
+</body>
+</html>

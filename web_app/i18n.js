@@ -199,7 +199,7 @@ export const I18N = {
     "footer.about": "關於",
 
     "about.title": "關於土增稅神器",
-    "about.body1": "本網頁為「土增稅神器」行動 App 的免費線上版本，由留白事務所提供。所有計算於您的瀏覽器本機完成，不會傳送任何資料到伺服器。",
+    "about.body1": "本網頁為「土增稅神器」行動 App 的免費線上版本，由土增稅神器提供。所有計算於您的瀏覽器本機完成，不會傳送任何資料到伺服器。",
     "about.body2": "計算公式對應行動 App，包含持有年限長期減徵、自用住宅超面積分段、物價指數調整等。結果僅供試算參考，正式繳納請以地方稅捐處核定為準。",
     "about.version": "版本：v1.0.0 (Web)",
     "about.close": "關閉",
@@ -229,7 +229,7 @@ export const I18N = {
     "hooks.needOther": "只是先試算",
     "hooks.submit": "登記搶先體驗（免費）",
     "hooks.submitting": "送出中…",
-    "hooks.privacy": "送出即同意留白事務所為通知與服務目的使用上述資料，可隨時要求刪除。",
+    "hooks.privacy": "送出即同意土增稅神器為通知與服務目的使用上述資料，可隨時要求刪除。",
     "hooks.legal": "以上為估算值，非任何稅額或優惠之保證；實際稅額以主管稽徵機關核定為準。",
     "hooks.success": "已登記！上線時第一批通知你。",
     "hooks.successNote": "想更快？加 LINE 直接聊：",

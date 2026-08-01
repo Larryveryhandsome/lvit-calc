@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>查詢我的報告｜土增稅神器</title>
+<meta name="description" content="用訂單編號與匯款帳號末五碼，查詢您訂購的個案土地稅負情境對照報告。" />
+<meta name="robots" content="noindex, follow" />
+<link rel="canonical" href="https://calc.zengzhisui.com/lookup.html" />
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+<link rel="stylesheet" href="./styles.css?v=30" />
+<link rel="stylesheet" href="./articles/articles.css?v=30" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+.lk-box { border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:20px; margin:18px 0; }
+.lk-f { margin-bottom:14px; }
+.lk-f label { display:block; font-size:.82rem; font-weight:700; color:var(--ink-soft); margin-bottom:5px; }
+.lk-f input { width:100%; height:44px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 12px; background:var(--bg); color:var(--ink); box-sizing:border-box; }
+.lk-f .hint { font-size:.75rem; color:var(--ink-faint); margin-top:4px; display:block; }
+.lk-go { width:100%; height:48px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1rem; cursor:pointer; }
+.lk-go:disabled { opacity:.55; cursor:not-allowed; }
+.lk-msg { font-size:.88rem; line-height:1.75; margin-top:14px; padding:14px 16px; border-radius:var(--radius-sm); }
+.lk-msg.ok { background:color-mix(in srgb, var(--brand) 10%, var(--surface)); border:1.5px solid var(--brand); }
+.lk-msg.wait { background:var(--surface-2); border:1px solid var(--border-strong); }
+.lk-msg.err { background:color-mix(in srgb, #d33 8%, var(--surface)); border:1px solid #d33; }
+.lk-open { display:inline-flex; align-items:center; justify-content:center; height:46px; padding:0 26px; margin-top:10px; border-radius:999px; background:var(--brand); color:#fff; font-weight:800; text-decoration:none; }
+.lk-open:hover { filter:brightness(1.07); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">免費試算 →</a>
+</div>
+
+<article class="post">
+<h1>查詢我的報告</h1>
+<div class="post-meta">個案土地稅負情境對照報告</div>
+
+<p style="font-size:.88rem;line-height:1.75;color:var(--ink-soft)">輸入訂購時取得的<strong>訂單編號</strong>與<strong>匯款帳號末五碼</strong>，即可取得您的專屬報告網址。報告可永久查看、可列印 A4。</p>
+
+<div class="lk-box">
+  <form id="lk-form" novalidate>
+    <div class="lk-f">
+      <label for="lk-id">訂單編號</label>
+      <input type="text" id="lk-id" placeholder="LV..." autocomplete="off" required />
+      <span class="hint">送出訂購資料後畫面顯示的編號，以 LV 開頭</span>
+    </div>
+    <div class="lk-f">
+      <label for="lk-last5">匯款帳號末五碼</label>
+      <input type="text" id="lk-last5" inputmode="numeric" maxlength="5" placeholder="12345" autocomplete="off" required />
+    </div>
+    <button type="submit" class="lk-go" id="lk-btn">查詢</button>
+  </form>
+  <div class="lk-msg" id="lk-msg" hidden></div>
+</div>
+
+<p style="font-size:.8rem;line-height:1.75;color:var(--ink-soft)">
+忘記訂單編號、或查詢後顯示查無資料？請透過
+<a class="js-line-cta" href="#" hidden target="_blank" rel="noopener">LINE 官方帳號</a>
+與我們聯繫，並提供您的匯款時間與末五碼。
+</p>
+
+<p style="font-size:.76rem;line-height:1.8;color:var(--ink-faint);border-top:1px solid var(--border);padding-top:14px;margin-top:24px">
+留白創研有限公司｜統一編號 00018173｜本公司為顧問服務業者，非地政士／會計師／記帳士／律師事務所；不代辦、不代理申報、不代收稅款。
+</p>
+
+</article>
+</div>
+<script src="./line-config.js?v=30"></script>
+<script>
+(function () {
+  var form = document.getElementById("lk-form");
+  var btn = document.getElementById("lk-btn");
+  var msg = document.getElementById("lk-msg");
+
+  function say(html, kind) {
+    msg.hidden = false;
+    msg.className = "lk-msg " + kind;
+    msg.innerHTML = html;
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var id = document.getElementById("lk-id").value.trim().toUpperCase();
+    var last5 = document.getElementById("lk-last5").value.trim();
+    if (!id || !last5) return say("請填寫訂單編號與匯款帳號末五碼。", "err");
+
+    btn.disabled = true;
+    btn.textContent = "查詢中…";
+    try {
+      var r = await fetch("/api/lookup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id, last5: last5 }),
+      });
+      var j = await r.json();
+      if (!r.ok || !j.ok) throw new Error(j.error || "查詢失敗");
+
+      if (j.ready && j.reportUrl) {
+        say('<strong>報告已完成。</strong><br />訂單 ' + j.id + '<br /><a class="lk-open" href="' + j.reportUrl + '">開啟我的報告 →</a>', "ok");
+      } else {
+        say('<strong>已收到您的訂單（' + j.id + '）。</strong><br />報告製作中，完成後可在此頁查詢取得。若您的案件資料尚未填齊，我們會透過您留的聯絡方式詢問。', "wait");
+      }
+    } catch (err) {
+      say(String(err.message || "查詢失敗"), "err");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "查詢";
+    }
+  });
+})();
+</script>
+</body>
+</html>

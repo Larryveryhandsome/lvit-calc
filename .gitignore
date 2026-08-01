@@ -11,6 +11,11 @@ orders.jsonl
 orders*.jsonl
 *.orders.json
 
+# 客戶專屬報告：含該客戶的土地現值、面積、持有年限等個案資料，不得進公開 repo
+# 只保留 sample.html（去識別化的公開範例，商品頁會連過去）
+web_app/r/*
+!web_app/r/sample.html
+
 # 雜項
 node_modules/
 *.zip

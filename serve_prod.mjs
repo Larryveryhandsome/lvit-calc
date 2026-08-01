@@ -9,6 +9,7 @@ const ROOT = normalize("D:/1.我自己的東西/留白事務所有限公司/留�
 const PORT = Number(process.env.PORT || 5900);
 // 訂單落在網站目錄之外，避免被當成靜態檔案對外提供
 const ORDERS = normalize(join(ROOT, "..", "orders.jsonl"));
+const STATUS_FILE = normalize(join(ROOT, "..", "orders-status.jsonl"));
 
 const MAX_BODY = 16 * 1024;        // 訂單頂多幾百 bytes，16KB 已極寬鬆
 const RATE_WINDOW_MS = 60_000;
@@ -73,9 +74,49 @@ createServer(async (req, res) => {
     res.end(body);
   };
 
-  // ── 收單端點：唯一允許的 POST ────────────────────────
+  // ── POST 端點：只開放收單與訂單查詢 ──────────────────
   if (req.method === "POST") {
     const url = new URL(req.url, "http://x");
+
+    // 訂單查詢：客戶用訂單編號＋匯款末五碼自行取回報告網址，
+    // 交付因此不需要寄信或發訊息。
+    if (url.pathname === "/api/lookup") {
+      const ip = clientIp(req);
+      if (!rateOk(ip, Date.now())) {
+        return send(429, JSON.stringify({ ok: false, error: "查詢過於頻繁，請稍後再試" }), { "Content-Type": "application/json; charset=utf-8" });
+      }
+      let body = "", tooBig = false;
+      req.on("data", (c) => { if (tooBig) return; body += c; if (body.length > 2048) { tooBig = true; req.destroy(); } });
+      req.on("end", async () => {
+        if (tooBig) return send(413, JSON.stringify({ ok: false }), { "Content-Type": "application/json; charset=utf-8" });
+        let d;
+        try { d = JSON.parse(body); } catch { return send(400, JSON.stringify({ ok: false, error: "格式錯誤" }), { "Content-Type": "application/json; charset=utf-8" }); }
+        const id = String(d?.id || "").trim().toUpperCase();
+        const last5 = String(d?.last5 || "").trim();
+        if (!id || !last5) return send(400, JSON.stringify({ ok: false, error: "請輸入訂單編號與匯款末五碼" }), { "Content-Type": "application/json; charset=utf-8" });
+        try {
+          const lines = (await readFile(ORDERS, "utf8")).trim().split("\n");
+          const order = lines.map((l) => { try { return JSON.parse(l); } catch { return null; } })
+            .find((o) => o && o.id === id && o.last5 === last5);
+          // 編號與末五碼都對才回應，避免用編號窮舉他人訂單
+          if (!order) return send(404, JSON.stringify({ ok: false, error: "查無此訂單，請確認編號與末五碼是否正確" }), { "Content-Type": "application/json; charset=utf-8" });
+
+          let reportUrl = null;
+          try {
+            const st = (await readFile(STATUS_FILE, "utf8")).trim().split("\n");
+            const rec = st.map((l) => { try { return JSON.parse(l); } catch { return null; } })
+              .filter((s) => s && s.id === id && s.reportUrl).pop();
+            if (rec) reportUrl = rec.reportUrl;
+          } catch {}
+
+          send(200, JSON.stringify({ ok: true, id, at: order.at, ready: !!reportUrl, reportUrl }), { "Content-Type": "application/json; charset=utf-8" });
+        } catch {
+          send(500, JSON.stringify({ ok: false, error: "系統忙碌，請改用 LINE 聯繫" }), { "Content-Type": "application/json; charset=utf-8" });
+        }
+      });
+      return;
+    }
+
     if (url.pathname !== "/api/order") {
       return send(404, "not found", { "Content-Type": "text/plain; charset=utf-8" });
     }

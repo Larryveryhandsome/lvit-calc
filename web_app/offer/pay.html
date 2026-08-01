@@ -203,7 +203,7 @@
       const line = window.LVIT_LINE_URL
         ? `<br />若 24 小時內未收到回覆，請透過 <a href="${window.LVIT_LINE_URL}" target="_blank" rel="noopener">LINE 官方帳號</a>聯繫我們並提供訂單編號。`
         : "";
-      say(`<strong>已收到您的訂購資料。</strong><br />訂單編號：<strong>${j.id}</strong>（請截圖保存）<br />我們會核對款項後開始製作報告，並以您留的聯絡方式通知您專屬查詢網址。${line}`, "ok");
+      say(`<strong>已收到您的訂購資料。</strong><br />訂單編號：<strong>${j.id}</strong>（請截圖保存）<br />我們會核對款項後開始製作報告。完成後，您可以隨時到<a href="/lookup.html">查詢我的報告</a>，輸入這組訂單編號與匯款末五碼取得報告網址。${line}`, "ok");
     } catch (err) {
       btn.disabled = false;
       btn.textContent = "送出訂購資料";

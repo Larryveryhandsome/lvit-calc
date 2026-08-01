@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>契稅試算｜買賣 6%、贈與 6%、交換 2%，含申報期限｜土增稅神器</title>
+<meta name="description" content="契稅怎麼算？買賣與贈與 6%、典權 4%、交換與分割 2%。稅基是房屋評定現值不是成交價，土地不課契稅。輸入即算，並算出 30 日申報期限。免費免登入。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/tools/deed-tax.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css?v=30" />
+<link rel="stylesheet" href="../articles/articles.css?v=30" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="契稅試算｜買賣 6%、贈與 6%、交換 2%，含申報期限" />
+<meta property="og:description" content="稅基是房屋評定現值不是成交價，土地不課契稅。輸入即算，並算出申報期限。" />
+<meta property="og:url" content="https://calc.zengzhisui.com/tools/deed-tax.html" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"契稅試算","url":"https://calc.zengzhisui.com/tools/deed-tax.html","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"publisher":{"@type":"Organization","name":"留白創研有限公司"}}
+</script>
+<style>
+.dt-form { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:16px 0; }
+.dt-form h3 { margin:0 0 10px; font-size:.95rem; color:var(--brand-ink); border-bottom:1px solid var(--border); padding-bottom:6px; }
+.dt-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+@media (max-width:560px){ .dt-row { grid-template-columns:1fr; } }
+.dt-f label { display:block; font-size:.8rem; font-weight:700; color:var(--ink-soft); margin-bottom:4px; }
+.dt-f input, .dt-f select { width:100%; height:42px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; }
+.dt-f .hint { font-size:.72rem; color:var(--ink-faint); display:block; margin-top:3px; line-height:1.45; }
+.dt-go { width:100%; height:50px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1.05rem; cursor:pointer; margin-top:6px; }
+.dt-out { display:none; border:1px solid var(--border-strong); border-radius:var(--radius); background:var(--surface); padding:20px; margin:18px 0; }
+.dt-big { border:1.5px solid var(--brand); background:var(--brand-soft); border-radius:var(--radius-sm); padding:14px 16px; text-align:center; margin-bottom:14px; }
+.dt-big .lbl { font-size:.78rem; color:var(--ink-soft); font-weight:700; }
+.dt-big .val { font-size:1.9rem; font-weight:800; color:var(--brand-ink); font-variant-numeric:tabular-nums; line-height:1.2; }
+.dt-tbl { width:100%; border-collapse:collapse; font-size:.86rem; margin:10px 0; }
+.dt-tbl td { border-bottom:1px solid var(--border); padding:7px 9px; }
+.dt-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+.dt-tbl tr.sum td { font-weight:800; border-top:1.5px solid var(--brand); border-bottom:none; color:var(--brand-ink); }
+.dt-list { padding-left:1.2em; margin:8px 0 0; }
+.dt-list li { margin:.4rem 0; font-size:.85rem; line-height:1.65; }
+.dt-list li.ok::marker { content:"✅ "; }
+.dt-list li.warn::marker { content:"⚠️ "; }
+.dt-list li.info::marker { content:"▫️ "; }
+.dt-err { color:#d33; font-size:.85rem; margin-top:8px; }
+.dt-rate { width:100%; border-collapse:collapse; font-size:.84rem; margin:12px 0; }
+.dt-rate th, .dt-rate td { border:1px solid var(--border); padding:7px 9px; text-align:left; }
+.dt-rate thead th { background:var(--surface-2); font-weight:700; }
+.dt-note { border:1px solid var(--border-strong); background:var(--surface-2); border-radius:var(--radius-sm); padding:12px 14px; font-size:.82rem; line-height:1.7; color:var(--ink-soft); margin:14px 0; }
+#dt-swap-row, #dt-split-row { display:none; }
+@media print { .article-top, .dt-form, .post-cta { display:none !important; } .dt-out { display:block !important; border:none; padding:0; } }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">土增稅試算 →</a>
+</div>
+
+<article class="post">
+<h1>契稅試算</h1>
+<div class="post-meta">免費・免登入 ・ 含 30 日申報期限計算 ・ 可列印</div>
+
+<div class="dt-note">
+<strong>先講兩件最容易算錯的事：</strong><br />
+① <strong>契稅只課房屋，不課土地。</strong>房地一起買賣時，土地部分課的是土地增值稅，完全不進契稅稅基（契稅條例第 2 條但書）。<br />
+② <strong>稅基是「房屋評定現值」，不是成交價、也不是實價登錄價。</strong>同一棟房子成交 3,000 萬或 2,000 萬，契稅完全一樣。填錯欄位會算出好幾倍的金額。
+</div>
+
+<form id="dt-form">
+  <div class="dt-form">
+    <h3>① 契約類型與稅基</h3>
+    <div class="dt-row">
+      <div class="dt-f">
+        <label for="d-type">契約類型</label>
+        <select id="d-type">
+          <option value="sale">買賣（6%）</option>
+          <option value="gift">贈與（6%）</option>
+          <option value="dian">典權・承典（4%）</option>
+          <option value="swap">交換（2%，差額 6%）</option>
+          <option value="split">共有物分割（2%，差額 6%）</option>
+          <option value="occupy">占有（6%）</option>
+        </select>
+      </div>
+      <div class="dt-f">
+        <label for="d-value">房屋評定現值（元）</label>
+        <input type="number" id="d-value" min="0" step="any" placeholder="例：1200000" required />
+        <span class="hint">＝房屋課稅現值＋房屋免稅現值，見房屋稅單或稅籍證明</span>
+      </div>
+    </div>
+
+    <div class="dt-row" id="dt-swap-row">
+      <div class="dt-f">
+        <label for="d-out">讓出房屋的評定現值（元）</label>
+        <input type="number" id="d-out" min="0" step="any" placeholder="例：1000000" />
+        <span class="hint">交換時，上方填「取得」的、這裡填「讓出」的</span>
+      </div>
+      <div class="dt-f"><span class="hint" style="margin-top:26px">等值部分課 2%，多取得的差額部分課 6%；<strong>差額只對多取得的一方加課</strong>，另一方仍只課 2%。</span></div>
+    </div>
+
+    <div class="dt-row" id="dt-split-row">
+      <div class="dt-f">
+        <label for="d-orig">分割前應有部分對應現值（元）</label>
+        <input type="number" id="d-orig" min="0" step="any" placeholder="例：1000000" />
+        <span class="hint">上方填「分得部分」的現值、這裡填分割前你的應有部分</span>
+      </div>
+      <div class="dt-f"><span class="hint" style="margin-top:26px">分得價值與原應有部分相同者課 2%；多分得的差額部分課 6%。</span></div>
+    </div>
+  </div>
+
+  <div class="dt-form">
+    <h3>② 申報期限（選填）</h3>
+    <div class="dt-row">
+      <div class="dt-f">
+        <label for="d-date">契約成立日</label>
+        <input type="date" id="d-date" />
+        <span class="hint">契稅的 30 日<strong>當日起算</strong>（與土增稅、贈與稅的次日起算不同）</span>
+      </div>
+      <div class="dt-f"><span class="hint" style="margin-top:26px">填了就會算出申報期限並提醒逾期的怠報金規則。</span></div>
+    </div>
+  </div>
+
+  <button type="submit" class="dt-go">計算契稅</button>
+  <p class="dt-err" id="dt-err" hidden></p>
+</form>
+
+<div class="dt-out" id="dt-out"></div>
+
+<h2>契稅稅率</h2>
+<div class="table-scroll">
+<table class="dt-rate">
+<thead><tr><th>契約類型</th><th>稅率</th><th>納稅義務人</th></tr></thead>
+<tbody>
+<tr><td>買賣</td><td>6%</td><td>買受人</td></tr>
+<tr><td>贈與</td><td>6%</td><td>受贈人</td></tr>
+<tr><td>占有</td><td>6%</td><td>占有而依法取得所有權之人</td></tr>
+<tr><td>典權（承典）</td><td>4%</td><td>典權人</td></tr>
+<tr><td>交換</td><td>2%（差額 6%）</td><td>各交換人；差額由多取得的一方負擔</td></tr>
+<tr><td>共有物分割</td><td>2%（差額 6%）</td><td>各分割人</td></tr>
+<tr><td>土地</td><td colspan="2"><strong>免徵契稅</strong>（開徵土地增值稅區域，契稅條例第 2 條但書）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>不課徵或免徵的情形</h2>
+<ul class="dt-list">
+<li class="info"><strong>繼承取得</strong>（含繼承人間分割繼承之不動產）不課徵契稅。</li>
+<li class="info"><strong>信託關係人間移轉</strong>不課徵契稅（契稅條例第 14 條之 1）。</li>
+<li class="info">各級政府機關、地方自治團體、公立學校因公使用取得之不動產免徵（第 14 條）。</li>
+<li class="warn">依法<strong>領買、標購公產</strong>或<strong>向法院標購拍賣</strong>取得者，移轉價格低於評定標準價格時從其移轉價格；但拍定價高於評定現值時，仍按評定現值，不能取高（第 11 條、第 13 條但書）。房地一併拍定時，須先由稽徵機關認定房屋部分的價格，不可整筆當契價。</li>
+</ul>
+
+<div class="post-cta">
+  <h2>下一步</h2>
+  <p>買賣或贈與不動產時，契稅只是其中一項。土地部分的<strong>土地增值稅</strong>通常金額大得多。</p>
+  <p>想一次看完賣一間房會遇到的稅，用<a href="https://calc.zengzhisui.com/tools/report.html">賣房稅務總報告</a>；贈與給子女的情形，用<a href="https://calc.zengzhisui.com/tools/gift-tax.html">贈與稅試算</a>。</p>
+  <a class="btn-calc" href="https://calc.zengzhisui.com/">土增稅免費試算 →</a>
+  <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">加 LINE 詢問</a>
+</div>
+<p class="post-disclaimer">本試算為一般性資訊整理，非稅務簽證或法律意見；實際應納稅額與各項要件是否具備，以主管稽徵機關核定為準。留白創研有限公司（統一編號 00018173）｜本公司為顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記與稅務申報請洽具名之持照專業人員辦理。</p>
+</article>
+</div>
+<script src="../line-config.js?v=30"></script>
+<script>
+(function () {
+  var RATES = {
+    sale:   { name: "買賣",       rate: 0.06, who: "買受人",   law: "契稅條例第 3 條第 1 款、第 4 條" },
+    gift:   { name: "贈與",       rate: 0.06, who: "受贈人",   law: "契稅條例第 3 條第 4 款、第 7 條" },
+    dian:   { name: "典權（承典）", rate: 0.04, who: "典權人",   law: "契稅條例第 3 條第 2 款、第 5 條" },
+    swap:   { name: "交換",       rate: 0.02, who: "各交換人", law: "契稅條例第 3 條第 3 款、第 6 條" },
+    split:  { name: "共有物分割",  rate: 0.02, who: "各分割人", law: "契稅條例第 3 條第 5 款、第 8 條" },
+    occupy: { name: "占有",       rate: 0.06, who: "占有取得所有權之人", law: "契稅條例第 3 條第 6 款、第 9 條" },
+  };
+  var DIFF_RATE = 0.06; // 交換／分割之差額部分
+
+  var $ = function (id) { return document.getElementById(id); };
+  var num = function (id) { var v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : 0; };
+  var TWD = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
+
+  function toggleRows() {
+    var t = $("d-type").value;
+    $("dt-swap-row").style.display = t === "swap" ? "" : "none";
+    $("dt-split-row").style.display = t === "split" ? "" : "none";
+  }
+  $("d-type").addEventListener("change", toggleRows);
+  toggleRows();
+
+  $("dt-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var err = $("dt-err");
+    err.hidden = true;
+
+    var type = $("d-type").value;
+    var cfg = RATES[type];
+    var value = num("d-value");
+    if (!value) { err.textContent = "請輸入房屋評定現值。"; err.hidden = false; return; }
+
+    var rows = "", notes = [], tax = 0, equalPart = value, diffPart = 0;
+    var add = function (l, v, cls) { rows += '<tr' + (cls ? ' class="' + cls + '"' : '') + '><td>' + l + '</td><td>' + v + '</td></tr>'; };
+
+    if (type === "swap" || type === "split") {
+      var other = type === "swap" ? num("d-out") : num("d-orig");
+      if (!other) {
+        err.textContent = type === "swap" ? "交換請填寫讓出房屋的評定現值。" : "分割請填寫分割前應有部分對應現值。";
+        err.hidden = false; return;
+      }
+      equalPart = Math.min(value, other);
+      diffPart = Math.max(0, value - other);
+      tax = equalPart * cfg.rate + diffPart * DIFF_RATE;
+
+      add(type === "swap" ? "取得房屋評定現值" : "分得部分現值", TWD(value));
+      add(type === "swap" ? "讓出房屋評定現值" : "分割前應有部分現值", TWD(other));
+      add("等值部分（課 " + (cfg.rate * 100) + "%）", TWD(equalPart) + " × " + (cfg.rate * 100) + "% = " + TWD(equalPart * cfg.rate));
+      if (diffPart > 0) {
+        add("差額部分（課 " + (DIFF_RATE * 100) + "%）", TWD(diffPart) + " × " + (DIFF_RATE * 100) + "% = " + TWD(diffPart * DIFF_RATE));
+        notes.push(["warn", "您<strong>多取得</strong> " + TWD(diffPart) + " 的價值，該差額部分按 6% 課徵。<strong>差額只對多取得的一方加課</strong>，對方仍僅就等值部分課 " + (cfg.rate * 100) + "%。"]);
+      } else {
+        notes.push(["ok", "取得價值未超過讓出／原應有部分，估算無差額加課，全部按 " + (cfg.rate * 100) + "% 計算。"]);
+      }
+    } else {
+      tax = value * cfg.rate;
+      add("房屋評定現值（契價）", TWD(value));
+      add("稅率（" + cfg.name + "）", (cfg.rate * 100) + "%");
+    }
+
+    add("<strong>應納契稅</strong>", "<strong>" + TWD(tax) + "</strong>", "sum");
+
+    notes.push(["info", "納稅義務人：<strong>" + cfg.who + "</strong>（" + cfg.law + "）。"]);
+    notes.push(["warn", "本試算<strong>只計算房屋</strong>。若同時移轉土地，土地不課契稅但要課<a href='https://calc.zengzhisui.com/'>土地增值稅</a>，金額通常大得多。"]);
+
+    // 申報期限：契稅自契約成立「當日」起算，故末日 = 成立日 + 29 天
+    var dv = $("d-date").value;
+    if (dv) {
+      var d0 = new Date(dv + "T00:00:00");
+      if (!isNaN(d0.getTime())) {
+        var due = new Date(d0.getTime());
+        due.setDate(due.getDate() + 29);
+        var fmt = function (d) { return d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate(); };
+        var wd = ["日", "一", "二", "三", "四", "五", "六"][due.getDay()];
+        add("契約成立日", fmt(d0));
+        add("申報期限（當日起算 30 日）", fmt(due) + "（星期" + wd + "）");
+        notes.push(["warn", "契稅的 30 日<strong>自契約成立當日起算</strong>（當日計入），與土增稅、贈與稅的「次日起算」不同——這是最常被算差一天的地方。末日若為星期日、國定假日或其他休息日，順延至次一上班日。"]);
+        var today = new Date(); today.setHours(0, 0, 0, 0);
+        var over = Math.floor((today - due) / 86400000);
+        if (over > 0) {
+          var units = Math.floor((over - 1) / 3) + 1;
+          var fine = Math.min(tax, Math.min(15000, tax * 0.01 * units));
+          notes.push(["warn", "已逾申報期限約 " + over + " 日。逾期申報依契稅條例第 24 條加徵<strong>怠報金</strong>：每逾 3 日加徵應納稅額 1%，以應納稅額為限且不超過 15,000 元（粗估約 " + TWD(fine) + "，實際日數與金額以稽徵機關核定為準）。請儘速洽稽徵機關或您委任的地政士處理。"]);
+        }
+      }
+    }
+
+    notes.push(["info", "逾期<strong>繳納</strong>（收到繳款書後未按期繳）另有滯納金，現行依稅捐稽徵法第 20 條每逾 3 日加徵 1%、上限 10%。契稅條例第 25 條的「每逾二日 1%」為舊文字，實務優先適用稅捐稽徵法，直接照條例會高估。"]);
+    notes.push(["info", "未完稅無法辦理所有權移轉登記（契稅條例第 23 條）。申報與登記請洽您委任的執業地政士辦理。"]);
+
+    $("dt-out").innerHTML =
+      '<div class="dt-big"><div class="lbl">應納契稅（估算）</div><div class="val">' + TWD(tax) + '</div></div>' +
+      '<table class="dt-tbl">' + rows + '</table>' +
+      '<ul class="dt-list">' + notes.map(function (n) { return '<li class="' + n[0] + '">' + n[1] + '</li>'; }).join("") + '</ul>';
+    $("dt-out").style.display = "block";
+    $("dt-out").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
+</body>
+</html>

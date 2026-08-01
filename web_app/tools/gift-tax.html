@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>贈與稅試算 2026｜免稅額 244 萬、三級稅率一次算｜土增稅神器</title>
+<meta name="description" content="贈與稅怎麼算？免稅額 244 萬、10%／15%／20% 三級累進，並可扣除受贈人負擔的土增稅與契稅。輸入即算，附同年度多次贈與合併計算。免費免登入。" />
+<link rel="canonical" href="https://calc.zengzhisui.com/tools/gift-tax.html" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="stylesheet" href="../styles.css?v=30" />
+<link rel="stylesheet" href="../articles/articles.css?v=30" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="贈與稅試算 2026｜免稅額 244 萬、三級稅率一次算" />
+<meta property="og:description" content="輸入贈與財產價值，立即算出應納贈與稅，含同年度合併計算與土增稅契稅扣除。" />
+<meta property="og:url" content="https://calc.zengzhisui.com/tools/gift-tax.html" />
+<meta property="og:image" content="https://calc.zengzhisui.com/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"贈與稅試算","url":"https://calc.zengzhisui.com/tools/gift-tax.html","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"publisher":{"@type":"Organization","name":"留白創研有限公司"}}
+</script>
+<style>
+.gt-form { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:16px 0; }
+.gt-form h3 { margin:0 0 10px; font-size:.95rem; color:var(--brand-ink); border-bottom:1px solid var(--border); padding-bottom:6px; }
+.gt-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+@media (max-width:560px){ .gt-row { grid-template-columns:1fr; } }
+.gt-f label { display:block; font-size:.8rem; font-weight:700; color:var(--ink-soft); margin-bottom:4px; }
+.gt-f input, .gt-f select { width:100%; height:42px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 10px; background:var(--bg); color:var(--ink); box-sizing:border-box; }
+.gt-f .hint { font-size:.72rem; color:var(--ink-faint); display:block; margin-top:3px; line-height:1.45; }
+.gt-go { width:100%; height:50px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1.05rem; cursor:pointer; margin-top:6px; }
+.gt-out { display:none; border:1px solid var(--border-strong); border-radius:var(--radius); background:var(--surface); padding:20px; margin:18px 0; }
+.gt-big { border:1.5px solid var(--brand); background:var(--brand-soft); border-radius:var(--radius-sm); padding:14px 16px; text-align:center; margin-bottom:14px; }
+.gt-big .lbl { font-size:.78rem; color:var(--ink-soft); font-weight:700; }
+.gt-big .val { font-size:1.9rem; font-weight:800; color:var(--brand-ink); font-variant-numeric:tabular-nums; line-height:1.2; }
+.gt-tbl { width:100%; border-collapse:collapse; font-size:.86rem; margin:10px 0; }
+.gt-tbl td { border-bottom:1px solid var(--border); padding:7px 9px; }
+.gt-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+.gt-tbl tr.sum td { font-weight:800; border-top:1.5px solid var(--brand); border-bottom:none; color:var(--brand-ink); }
+.gt-list { padding-left:1.2em; margin:8px 0 0; }
+.gt-list li { margin:.4rem 0; font-size:.85rem; line-height:1.65; }
+.gt-list li.ok::marker { content:"✅ "; }
+.gt-list li.warn::marker { content:"⚠️ "; }
+.gt-list li.info::marker { content:"▫️ "; }
+.gt-err { color:#d33; font-size:.85rem; margin-top:8px; }
+.gt-rate { width:100%; border-collapse:collapse; font-size:.84rem; margin:12px 0; }
+.gt-rate th, .gt-rate td { border:1px solid var(--border); padding:7px 9px; text-align:left; }
+.gt-rate thead th { background:var(--surface-2); font-weight:700; }
+.gt-rate td:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; }
+@media print { .article-top, .gt-form, .post-cta { display:none !important; } .gt-out { display:block !important; border:none; padding:0; } }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1457185118891912" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">土增稅試算 →</a>
+</div>
+
+<article class="post">
+<h1>贈與稅試算</h1>
+<div class="post-meta">免費・免登入 ・ 115 年度（2026）適用金額 ・ 可列印</div>
+
+<p>贈與稅由<strong>贈與人</strong>繳納，按<strong>曆年</strong>累計：同一個人在同一年度內贈與的財產要合併計算，全年只能減除一次免稅額。把土地或房屋送給子女時，受贈人要繳的<strong>土地增值稅與契稅可以從贈與總額中扣除</strong>（施行細則第 19 條），這一項常被漏掉。</p>
+
+<form id="gt-form">
+  <div class="gt-form">
+    <h3>① 這次贈與</h3>
+    <div class="gt-row">
+      <div class="gt-f">
+        <label for="g-value">本次贈與財產價值（元）</label>
+        <input type="number" id="g-value" min="0" step="any" placeholder="例：8000000" required />
+        <span class="hint">土地以<strong>公告土地現值</strong>、房屋以<strong>評定標準價格</strong>計，不是市價也不是成交價</span>
+      </div>
+      <div class="gt-f">
+        <label for="g-prior">同年度先前已贈與總額（元）</label>
+        <input type="number" id="g-prior" min="0" step="any" placeholder="0" />
+        <span class="hint">今年稍早贈與過就要填，會合併計算</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="gt-form">
+    <h3>② 可扣除項目（選填）</h3>
+    <div class="gt-row">
+      <div class="gt-f">
+        <label for="g-lvit">受贈人負擔的土地增值稅（元）</label>
+        <input type="number" id="g-lvit" min="0" step="any" placeholder="0" />
+        <span class="hint">土地無償移轉時，土增稅的納稅義務人是受贈人</span>
+      </div>
+      <div class="gt-f">
+        <label for="g-deed">受贈人負擔的契稅（元）</label>
+        <input type="number" id="g-deed" min="0" step="any" placeholder="0" />
+        <span class="hint">房屋贈與契稅 6%，納稅義務人是受贈人</span>
+      </div>
+    </div>
+    <div class="gt-row">
+      <div class="gt-f">
+        <label for="g-burden">其他附有負擔金額（元）</label>
+        <input type="number" id="g-burden" min="0" step="any" placeholder="0" />
+        <span class="hint">受贈人承擔的貸款等，須具財產價值且已履行或能確保履行；<strong>不含</strong>上面兩欄的稅</span>
+      </div>
+      <div class="gt-f">
+        <label for="g-paid">同年度先前已繳贈與稅（元）</label>
+        <input type="number" id="g-paid" min="0" step="any" placeholder="0" />
+        <span class="hint">合併計算後可扣抵</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="gt-form">
+    <h3>③ 贈與人代繳（選填）</h3>
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:.85rem;line-height:1.6">
+      <input type="checkbox" id="g-payfor" style="margin-top:3px;flex-shrink:0" />
+      <span>上述土增稅與契稅<strong>由贈與人代為繳納</strong>（依財政部函釋，代繳金額會另外併入贈與總額計課）</span>
+    </label>
+  </div>
+
+  <button type="submit" class="gt-go">計算贈與稅</button>
+  <p class="gt-err" id="gt-err" hidden></p>
+</form>
+
+<div class="gt-out" id="gt-out"></div>
+
+<h2>115 年度贈與稅稅率</h2>
+<div class="table-scroll">
+<table class="gt-rate">
+<thead><tr><th>課稅贈與淨額</th><th>稅率</th><th>累進差額</th></tr></thead>
+<tbody>
+<tr><td>2,811 萬元以下</td><td>10%</td><td>0</td></tr>
+<tr><td>超過 2,811 萬～5,621 萬元</td><td>15%</td><td>1,405,500</td></tr>
+<tr><td>超過 5,621 萬元</td><td>20%</td><td>4,216,000</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:.8rem;color:var(--ink-soft);line-height:1.7">免稅額每年 <strong>244 萬元</strong>（遺產及贈與稅法第 22 條）。上述級距金額與免稅額依同法第 12 條之 1 由財政部逐年檢視公告；級距金額自 114 年起適用 2,811 萬／5,621 萬，<strong>法條原文寫的 2,500 萬／5,000 萬是調整前的數字</strong>，實際適用以公告值為準。</p>
+
+<h2>要注意的事</h2>
+<ul class="gt-list">
+<li class="info"><strong>按贈與人、按曆年計算。</strong>夫妻各自是獨立的贈與人，各有一份 244 萬免稅額。免稅額全年只減除一次，不是每次贈與都能扣。</li>
+<li class="warn"><strong>申報期限是「次日」起算 30 日。</strong>超過免稅額的那次贈與行為發生後，自次日起算 30 日內申報（遺產及贈與稅法第 24 條）。末日遇假日順延。注意契稅是「當日」起算，兩者規則不同。</li>
+<li class="info"><strong>不動產贈與即使免稅也要申報。</strong>沒有取得證明書，地政機關不能辦移轉登記（第 42 條）。</li>
+<li class="warn"><strong>受贈的房地日後出售，房地合一稅可能很重。</strong>成本以受贈時的房屋評定現值與公告土地現值按物價指數調整後計算，遠低於市價，且持有期間自受贈日重新起算。省下的贈與稅有可能在賣出時加倍還回去，兩邊要一起看。</li>
+<li class="info">配偶相互贈與、對子女婚嫁贈與 100 萬元、作農業使用之農地贈與繼承人等，屬「不計入贈與總額」（第 20 條），不佔用免稅額，但農地有 5 年列管條件。</li>
+</ul>
+
+<div class="post-cta">
+  <h2>下一步</h2>
+  <p>贈與土地時，受贈人要繳的土增稅往往比贈與稅更可觀，建議一併試算。</p>
+  <p>還在比較「贈與、買賣、還是等繼承」哪種划算？可以參考<a href="https://calc.zengzhisui.com/offer/">個案土地稅負情境對照報告</a>，把不同做法的稅額並排算出來。</p>
+  <a class="btn-calc" href="https://calc.zengzhisui.com/">土增稅免費試算 →</a>
+  <a class="btn-line js-line-cta" href="#" hidden target="_blank" rel="noopener">加 LINE 詢問</a>
+</div>
+<p class="post-disclaimer">本試算為一般性資訊整理，非稅務簽證或法律意見；實際應納稅額與各項要件是否具備，以主管稽徵機關核定為準。留白創研有限公司（統一編號 00018173）｜本公司為顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記與稅務申報請洽具名之持照專業人員辦理。</p>
+</article>
+</div>
+<script src="../line-config.js?v=30"></script>
+<script>
+(function () {
+  // 115 年度（2026）適用值。依遺產及贈與稅法第12條之1逐年公告，改年度只需改這裡。
+  var YEAR = 115;
+  var EXEMPTION = 2440000;
+  var BRACKETS = [
+    { cap: 28110000, rate: 0.10, qd: 0 },
+    { cap: 56210000, rate: 0.15, qd: 1405500 },
+    { cap: Infinity,  rate: 0.20, qd: 4216000 },
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var num = function (id) { var v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : 0; };
+  var TWD = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
+
+  $("gt-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var err = $("gt-err");
+    err.hidden = true;
+
+    var value = num("g-value");
+    if (!value) { err.textContent = "請輸入本次贈與的財產價值。"; err.hidden = false; return; }
+
+    var prior = num("g-prior");
+    var lvit = num("g-lvit");
+    var deed = num("g-deed");
+    var burden = num("g-burden");
+    var paid = num("g-paid");
+    var payFor = $("g-payfor").checked;
+
+    // 贈與人代繳受贈人應負擔之土增稅／契稅，依財政部函釋以贈與論，須併入贈與總額
+    var addBack = payFor ? (lvit + deed) : 0;
+    var gross = prior + value + addBack;
+
+    // 附負擔扣除上限為該筆贈與財產價值；土增稅與契稅另依施行細則第19條扣除，兩者不重複
+    var burdenCapped = Math.min(burden, value);
+    var deduct = lvit + deed + burdenCapped;
+
+    var net = Math.max(0, gross - deduct - EXEMPTION);
+
+    var b = BRACKETS[0];
+    for (var i = 0; i < BRACKETS.length; i++) { if (net <= BRACKETS[i].cap) { b = BRACKETS[i]; break; } }
+    var taxYTD = Math.max(0, net * b.rate - b.qd);
+    var due = Math.max(0, taxYTD - paid);
+
+    var rows = "";
+    var add = function (label, val, cls) { rows += '<tr' + (cls ? ' class="' + cls + '"' : '') + '><td>' + label + '</td><td>' + val + '</td></tr>'; };
+
+    if (prior) add("同年度先前已贈與", TWD(prior));
+    add("本次贈與財產價值", TWD(value));
+    if (addBack) add("加：贈與人代繳之土增稅／契稅", TWD(addBack));
+    add("<strong>年度贈與總額</strong>", "<strong>" + TWD(gross) + "</strong>");
+    if (lvit) add("減：受贈人負擔土地增值稅", "−" + TWD(lvit));
+    if (deed) add("減：受贈人負擔契稅", "−" + TWD(deed));
+    if (burdenCapped) add("減：其他附有負擔" + (burden > value ? "（已以財產價值為上限）" : ""), "−" + TWD(burdenCapped));
+    add("減：免稅額（" + YEAR + " 年度）", "−" + TWD(EXEMPTION));
+    add("<strong>課稅贈與淨額</strong>", "<strong>" + TWD(net) + "</strong>");
+    add("適用稅率", (b.rate * 100) + "%" + (b.qd ? "，累進差額 " + TWD(b.qd) : ""));
+    add("年度累計應納稅額", TWD(taxYTD));
+    if (paid) add("減：同年度已繳", "−" + TWD(paid));
+    add("<strong>本次應納贈與稅</strong>", "<strong>" + TWD(due) + "</strong>", "sum");
+
+    var notes = [];
+    if (net === 0) {
+      notes.push(["ok", "課稅贈與淨額為 0，估算<strong>不生贈與稅</strong>。但若年度贈與總額超過免稅額 " + TWD(EXEMPTION) + "，仍須於期限內辦理申報。"]);
+    }
+    if (gross > EXEMPTION) {
+      notes.push(["warn", "年度贈與總額已超過免稅額，應於<strong>超過免稅額之贈與行為發生日次日起 30 日內</strong>申報（遺產及贈與稅法第 24 條）；末日遇假日順延。"]);
+    } else {
+      notes.push(["info", "年度贈與總額未超過免稅額，原則上無申報義務；但贈與不動產仍須申報以取得證明書，地政機關才能辦理移轉登記。"]);
+    }
+    if (payFor && (lvit + deed) > 0) {
+      notes.push(["info", "已將贈與人代繳的土增稅與契稅 " + TWD(addBack) + " 併入贈與總額（依財政部 65/09/07 台財稅第 36067 號函），同時該稅額仍可依施行細則第 19 條扣除。"]);
+    }
+    if (burden > value) {
+      notes.push(["warn", "附有負擔金額超過該筆贈與財產價值，已依施行細則第 18 條以財產價值為扣除上限。"]);
+    }
+    if (lvit || deed) {
+      notes.push(["info", "土地增值稅與契稅屬施行細則第 19 條之扣除項目，不應再重複列入「其他附有負擔」。"]);
+    }
+    notes.push(["warn", "受贈的房地將來出售時，房地合一稅的成本以<strong>受贈當時</strong>的評定現值與公告現值計算（非市價），持有期間也從受贈日重新起算，稅負可能遠高於這次省下的贈與稅。決定前建議兩邊一起算。"]);
+    notes.push(["info", "申報與登記程序請洽您委任的執業地政士、記帳士或會計師辦理。"]);
+
+    $("gt-out").innerHTML =
+      '<div class="gt-big"><div class="lbl">本次應納贈與稅（估算）</div><div class="val">' + TWD(due) + '</div></div>' +
+      '<table class="gt-tbl">' + rows + '</table>' +
+      '<ul class="gt-list">' + notes.map(function (n) { return '<li class="' + n[0] + '">' + n[1] + '</li>'; }).join("") + '</ul>';
+    $("gt-out").style.display = "block";
+    $("gt-out").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
+</body>
+</html>

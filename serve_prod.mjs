@@ -47,6 +47,8 @@ const MIME = {
 
 // 對齊 _headers
 const cacheFor = (path) => {
+  // 收款資訊與付款頁絕不快取：帳號一旦異動，快取的舊值會讓客戶匯錯錢
+  if (path === "/pay-config.js" || path === "/offer/pay.html") return "no-store, must-revalidate";
   if (path === "/sw.js") return "no-cache";
   if (path === "/" || path.endsWith("/index.html")) return "public, max-age=0, must-revalidate";
   if (path === "/favicon.svg") return "public, max-age=604800";

@@ -179,7 +179,7 @@ export const I18N = {
     "result.level": "級別",
     "result.formula": "公式",
     "result.amount": "稅額",
-    "result.levelNote": "百分比依持有年限 <20 / 20-30 / 30-40 / >=40 年分別適用；持有 20 年以上部分享長期優惠。",
+    "result.levelNote": "百分比依持有年限分別適用：持有超過 20、30、40 年，第二、三級超過 20% 的部分減徵 20%、30%、40%。",
 
     "history.heading": "歷史紀錄",
     "history.clear": "全部清除",
@@ -200,7 +200,7 @@ export const I18N = {
 
     "about.title": "關於土增稅神器",
     "about.body1": "本網頁為「土增稅神器」行動 App 的免費線上版本，由土增稅神器提供。所有計算於您的瀏覽器本機完成，不會傳送任何資料到伺服器。",
-    "about.body2": "計算公式對應行動 App，包含持有年限長期減徵、自用住宅超面積分段、物價指數調整等。結果僅供試算參考，正式繳納請以地方稅捐處核定為準。",
+    "about.body2": "計算公式依土地稅法第 33、34 條，並與財政部線上試算逐案比對，包含持有年限長期減徵、自用住宅超面積分段、物價指數調整等。結果僅供試算參考，正式繳納請以地方稅捐處核定為準。",
     "about.version": "版本：v1.0.0 (Web)",
     "about.close": "關閉",
 
@@ -211,9 +211,9 @@ export const I18N = {
     "overYes": "是（超出 {{limit}} ㎡）",
     "overNo": "否",
     "tier.L1": "適用級距：第一級（0 < 倍數 < 1）",
-    "tier.L2": "適用級距：第二級（1 < 倍數 < 2）",
+    "tier.L2": "適用級距：第二級（1 ≤ 倍數 < 2）",
     "tier.L3": "適用級距：第三級（倍數 ≥ 2）",
-    "tier.none": "漲價倍數為 0，無稅額",
+    "tier.none": "沒有漲價，無稅額",
 
     "hooks.diffLabel": "一般稅率 vs 自用住宅稅率，差額最多",
     "hooks.diffNote": "若符合自用住宅用地（一生一次／一生一屋）、重購退稅、長期持有等法定要件，實際稅額可能大不相同。是否符合，牽涉戶籍、時間與名下登記細節，需逐案確認。",
@@ -418,7 +418,7 @@ export const I18N = {
     "result.level": "Tier",
     "result.formula": "Formula",
     "result.amount": "Amount",
-    "result.levelNote": "Rates vary by holding years: <20 / 20-30 / 30-40 / >=40. Long-term ownership qualifies for reductions.",
+    "result.levelNote": "Rates vary by holding period: after more than 20, 30 or 40 years, the part above the 20% bracket is reduced by 20%, 30% or 40%.",
 
     "history.heading": "History",
     "history.clear": "Clear All",
@@ -439,7 +439,7 @@ export const I18N = {
 
     "about.title": "About LVIT Calculator",
     "about.body1": "This is the free web edition of our mobile LVIT Calculator by Liubai Studio. All calculations run locally in your browser — no data is sent to any server.",
-    "about.body2": "Formulas mirror the mobile app, including long-term holding reductions, self-use area tiering, and CPI adjustments. Results are estimates only; actual tax is determined by the local tax authority.",
+    "about.body2": "Formulas follow Land Tax Act Articles 33 and 34 and were checked case by case against the Ministry of Finance online calculator, including long-term holding reductions, self-use area tiering, and CPI adjustments. Results are estimates only; actual tax is determined by the local tax authority.",
     "about.version": "Version: v1.0.0 (Web)",
     "about.close": "Close",
 
@@ -450,7 +450,7 @@ export const I18N = {
     "overYes": "Yes (over {{limit}} m²)",
     "overNo": "No",
     "tier.L1": "Tier 1 applied (0 < ratio < 1)",
-    "tier.L2": "Tier 2 applied (1 < ratio < 2)",
+    "tier.L2": "Tier 2 applied (1 ≤ ratio < 2)",
     "tier.L3": "Tier 3 applied (ratio ≥ 2)",
     "tier.none": "Zero appreciation — no tax",
 

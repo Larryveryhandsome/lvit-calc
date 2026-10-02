@@ -63,12 +63,14 @@ function buildScenarios(c) {
 
   // 長期持有：若尚未滿 20 年，計算滿 20 年當下的稅額
   const held = r0.landHoldYear;
-  if (held < 20) {
-    const target = new Date(now.getFullYear() + Math.ceil(20 - held), now.getMonth(), now.getDate());
+  if (r0.holdBand === 0) {
+    // 「超過」20 年才減徵：取剛好跨過 20 年的那個週年
+    const wait = Math.floor(20 - held) + 1;
+    const target = new Date(now.getFullYear() + wait, now.getMonth(), now.getDate());
     const r20 = run({ targetDate: target });
     out.push({
       key: "hold20",
-      name: `持有滿 20 年後出售（約 ${Math.ceil(20 - held)} 年後）`,
+      name: `持有超過 20 年後出售（約 ${wait} 年後）`,
       note: "依土地稅法第 33 條，持有滿 20 年者，超過最低稅率 20% 之部分減徵 20%。此列未計入該期間公告現值可能的變動。",
       lvit: r20.landTaxValueNORMAL,
       detail: r20,

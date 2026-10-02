@@ -7,8 +7,8 @@
 <meta name="description" content="賣房子到底要繳多少稅？一次算完土地增值稅（自用 vs 一般）與房地合一稅，並檢核重購退稅、自用優惠與長期持有減徵，產出可列印的書面報告。免費、免登入。" />
 <link rel="canonical" href="https://calc.zengzhisui.com/tools/report.html" />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-<link rel="stylesheet" href="../styles.css?v=30" />
-<link rel="stylesheet" href="../articles/articles.css?v=30" />
+<link rel="stylesheet" href="../styles.css?v=31" />
+<link rel="stylesheet" href="../articles/articles.css?v=31" />
 <script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta property="og:type" content="website" />
 <meta property="og:title" content="賣房稅務總報告｜土增稅＋房地合一一次算完" />
@@ -138,9 +138,9 @@
 </div>
 <p class="post-disclaimer">本報告為一般性稅務資訊與試算服務，依你輸入的假設資料估算，非法律或稅務意見，亦非任何優惠適用之保證；實際稅額與適用要件以主管稽徵機關核定為準。留白創研有限公司｜顧問服務業者，非地政士／會計師／記帳士／律師事務所；土地登記、稅務申報、法律文件分別由持照專業人員辦理。</p>
 </div>
-<script src="../line-config.js?v=30"></script>
+<script src="../line-config.js?v=31"></script>
 <script type="module">
-import { calculateLVIT, formatTWD } from "../calc.js?v=30";
+import { calculateLVIT, formatTWD } from "../calc.js?v=31";
 
 const $ = (id) => document.getElementById(id);
 const num = (id) => parseFloat($(id).value) || 0;
@@ -223,9 +223,9 @@ $("rp-form").addEventListener("submit", (e) => {
   else if (selfUse && !firstTime) checks.push(["warn", `已用過一生一次，可確認是否符合「<strong>一生一屋</strong>」（設籍並持有連續滿 6 年、前 5 年未出租營業，面積都市 150㎡／非都市 350㎡）。若符合同樣適用 10%，估算可差約 ${W(lvitSaving)}。`]);
   else checks.push(["warn", `未勾選自用住宅要件，本報告以<strong>一般用地稅率</strong>估算。若實際符合自用（設籍、無出租營業、地上有房屋），估算可少約 <strong>${W(lvitSaving)}</strong>——值得逐項確認。`]);
 
-  if (lvit.landHoldYear >= 40) checks.push(["ok", "持有滿 40 年：超過最低稅率 20% 的部分減徵 40%（自動適用，已含在計算中）。"]);
-  else if (lvit.landHoldYear >= 30) checks.push(["ok", "持有滿 30 年：超過最低稅率 20% 的部分減徵 30%（自動適用）。"]);
-  else if (lvit.landHoldYear >= 20) checks.push(["ok", "持有滿 20 年：超過最低稅率 20% 的部分減徵 20%（自動適用）。"]);
+  if (lvit.holdBand === 40) checks.push(["ok", "持有超過 40 年：超過最低稅率 20% 的部分減徵 40%（自動適用，已含在計算中）。"]);
+  else if (lvit.holdBand === 30) checks.push(["ok", "持有超過 30 年：超過最低稅率 20% 的部分減徵 30%（自動適用）。"]);
+  else if (lvit.holdBand === 20) checks.push(["ok", "持有超過 20 年：超過最低稅率 20% 的部分減徵 20%（自動適用）。"]);
   else checks.push(["info", `持有 ${lvit.landHoldYear.toFixed(1)} 年，尚未達 20 年長期持有減徵門檻。`]);
 
   if (lvit.isOver) checks.push(["warn", `土地面積<strong>超過自用住宅上限</strong>（${lvit.selfLimit}㎡），超出部分已按一般稅率分段計算。`]);

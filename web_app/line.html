@@ -120,7 +120,8 @@ function show() {
   $("ln-who").textContent = member?.name || member?.account || "會員";
 }
 
-if (window.LVIT_LINE_BOT_OPEN) {
+// #preview：上線前負責人內部測試用（開關還沒打開時也能綁定）
+if (window.LVIT_LINE_BOT_OPEN || location.hash === "#preview") {
   $("ln-soon").hidden = true;
   $("ln-open").hidden = false;
   show();

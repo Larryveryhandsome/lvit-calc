@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>在 LINE 直接查土地增值稅｜土增稅神器</title>
+<meta name="description" content="土增稅神器官方 LINE：選縣市、段名、輸入地號，自動帶出公告現值與前次移轉，算出土地增值稅（試算）。原會員綁定送 3 次免費地號查詢。" />
+<meta name="robots" content="noindex, follow" />
+<link rel="canonical" href="https://calc.zengzhisui.com/line.html" />
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+<link rel="stylesheet" href="./styles.css?v=31" />
+<link rel="stylesheet" href="./articles/articles.css?v=31" />
+<script>try{var t=localStorage.getItem("lvit.theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+.ln-box { border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:20px; margin:18px 0; }
+.ln-f { margin-bottom:14px; }
+.ln-f label { display:block; font-size:.82rem; font-weight:700; color:var(--ink-soft); margin-bottom:5px; }
+.ln-f input { width:100%; height:44px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:0 12px; background:var(--bg); color:var(--ink); box-sizing:border-box; font-size:16px; }
+.ln-go { width:100%; height:48px; border:none; border-radius:var(--radius-sm); background:var(--brand); color:#fff; font-weight:800; font-size:1rem; cursor:pointer; }
+.ln-go:disabled { opacity:.55; cursor:not-allowed; }
+.ln-line { display:flex; align-items:center; justify-content:center; width:100%; box-sizing:border-box; height:48px; margin-top:10px; border-radius:var(--radius-sm); background:#06c755; color:#fff; font-weight:800; text-decoration:none; }
+.ln-line:hover { filter:brightness(1.05); text-decoration:none; }
+.ln-ghost { display:block; text-align:center; margin-top:10px; font-size:.88rem; }
+.ln-code { font:800 2.6rem/1.2 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing:.35em; text-align:center; margin:10px 0 4px; color:var(--brand-ink); }
+.ln-msg { font-size:.88rem; line-height:1.75; margin-top:14px; padding:14px 16px; border-radius:var(--radius-sm); }
+.ln-msg.err { background:color-mix(in srgb, #d33 8%, var(--surface)); border:1px solid #d33; }
+.ln-msg.wait { background:var(--surface-2); border:1px solid var(--border-strong); }
+.ln-steps { padding-left:1.2em; line-height:1.9; }
+.ln-small { font-size:.8rem; line-height:1.75; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="article-wrap">
+<div class="article-top">
+  <a class="article-brand" href="https://calc.zengzhisui.com/">土增稅神器</a>
+  <a class="to-calc" href="https://calc.zengzhisui.com/">免費試算 →</a>
+</div>
+
+<article class="post">
+<h1>在 LINE 直接查土地增值稅</h1>
+<div class="post-meta">土增稅神器官方 LINE（@906ofyvr）</div>
+
+<p>加入土增稅神器的官方 LINE，就能在手機上直接查：選縣市、段名、輸入地號，自動帶出公告現值與每位所有權人的前次移轉，算出一般用地與自用住宅用地的增值稅。也可以自己輸入數字「手動試算」，免費、不限次數。</p>
+<p class="ln-small">計算結果為試算，以稽徵機關核定為準。本公司為顧問服務業者，非地政士／會計師／記帳士；不代辦、不代理申報。</p>
+
+<div id="ln-soon" class="ln-box">
+  <strong>LINE 查詢即將開放。</strong>
+  <p class="ln-small" style="margin:.5em 0 0">開放後，原本的會員在這一頁綁定 LINE，就能領 3 次免費地號查詢。</p>
+</div>
+
+<div id="ln-open" hidden>
+  <h2>原會員：綁定 LINE，送 3 次免費地號查詢</h2>
+  <ol class="ln-steps">
+    <li>在這一頁登入土增稅神器會員</li>
+    <li>按「產生綁定碼」，畫面會出現 6 位數字（15 分鐘內有效）</li>
+    <li>按「打開 LINE 傳送綁定碼」，在 LINE 裡按送出，就完成了</li>
+  </ol>
+  <p class="ln-small">⚠ 我們不會在 LINE 裡跟你要帳號或密碼；登入只在這個網頁上進行。</p>
+
+  <div id="ln-login" class="ln-box" hidden>
+    <form id="ln-login-form" novalidate>
+      <div class="ln-f"><label for="ln-account">會員帳號（Email）</label>
+        <input type="email" id="ln-account" autocomplete="username" required /></div>
+      <div class="ln-f"><label for="ln-password">密碼</label>
+        <input type="password" id="ln-password" autocomplete="current-password" required /></div>
+      <button type="submit" class="ln-go" id="ln-login-btn">登入</button>
+    </form>
+    <p class="ln-small" style="margin-bottom:0">還沒有會員？到<a href="./">首頁</a>右上角「登入」→「註冊」，免費。</p>
+  </div>
+
+  <div id="ln-bind" class="ln-box" hidden>
+    <p style="margin-top:0">目前登入：<strong id="ln-who">—</strong>（<a href="#" id="ln-switch">換帳號</a>）</p>
+    <button type="button" class="ln-go" id="ln-bind-btn">產生綁定碼</button>
+    <div id="ln-result" hidden>
+      <div class="ln-code" id="ln-code">——————</div>
+      <p class="ln-small" style="text-align:center;margin:0">剩下 <span id="ln-left">15:00</span> 有效</p>
+      <a class="ln-line" id="ln-send" href="#" target="_blank" rel="noopener">打開 LINE 傳送綁定碼</a>
+      <a class="ln-ghost" id="ln-add" href="#" target="_blank" rel="noopener">還沒加好友？先加土增稅神器 LINE 好友</a>
+      <p class="ln-small">也可以自己在土增稅神器的 LINE 對話框輸入這 6 位數字。</p>
+    </div>
+  </div>
+  <div class="ln-msg" id="ln-msg" hidden></div>
+
+  <h2>收費方式</h2>
+  <p>手動試算免費、不限次數。地號自動帶入（會即時查詢地政資料）：原會員綁定送 3 次；之後每筆單次付費，查的時候才付，沒有月費。同一地號 30 天內重看不另收費；付款後查不到，會自動補一次重查（不另收費）。</p>
+</div>
+
+<p class="ln-small" style="border-top:1px solid var(--border);padding-top:14px;margin-top:24px">
+綁定時，我們的伺服器只會用你的登入資料向會員系統確認一次「你是會員」，確認後立即丟棄，不儲存、不記錄。詳見<a href="./legal/privacy.html">隱私權政策</a>。<br />
+留白創研有限公司｜統一編號 00018173
+</p>
+</article>
+</div>
+<script src="./line-config.js?v=31"></script>
+<script type="module">
+import { login } from "./api.js?v=31";
+
+const $ = (id) => document.getElementById(id);
+const KEYS = { token: "lvit.token", member: "lvit.member" };
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  del(k) { try { localStorage.removeItem(k); } catch {} },
+};
+let timer = null;
+
+function say(text, kind = "err") {
+  const m = $("ln-msg");
+  m.hidden = !text;
+  m.className = "ln-msg " + kind;
+  m.textContent = text || "";
+}
+
+function show() {
+  const token = store.get(KEYS.token);
+  let member = null;
+  try { member = JSON.parse(store.get(KEYS.member) || "null"); } catch {}
+  $("ln-login").hidden = !!token;
+  $("ln-bind").hidden = !token;
+  $("ln-who").textContent = member?.name || member?.account || "會員";
+}
+
+if (window.LVIT_LINE_BOT_OPEN) {
+  $("ln-soon").hidden = true;
+  $("ln-open").hidden = false;
+  show();
+}
+
+$("ln-login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  say("");
+  const btn = $("ln-login-btn");
+  btn.disabled = true;
+  btn.textContent = "登入中…";
+  try {
+    const r = await login($("ln-account").value.trim(), $("ln-password").value);
+    if (!r.ok) return say(r.message || "帳號或密碼錯誤");
+    store.set(KEYS.token, r.token);
+    store.set(KEYS.member, JSON.stringify(r.member));
+    $("ln-password").value = "";
+    show();
+  } catch (err) {
+    say("網路有問題，請稍後再試。");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "登入";
+  }
+});
+
+$("ln-switch").addEventListener("click", (e) => {
+  e.preventDefault();
+  store.del(KEYS.token);
+  store.del(KEYS.member);
+  $("ln-result").hidden = true;
+  show();
+});
+
+$("ln-bind-btn").addEventListener("click", async () => {
+  say("");
+  const btn = $("ln-bind-btn");
+  btn.disabled = true;
+  try {
+    const r = await fetch("/line/api/bind-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: store.get(KEYS.token) }),
+    });
+    const j = await r.json().catch(() => null);
+    if (!j) return say("LINE 查詢服務暫時無法連線，請稍後再試。");
+    if (!j.ok) {
+      if (/重新登入/.test(j.error || "")) { store.del(KEYS.token); store.del(KEYS.member); show(); }
+      return say(j.error || "暫時無法產生綁定碼，請稍後再試。");
+    }
+    $("ln-code").textContent = j.code;
+    $("ln-send").href = j.line_open;
+    $("ln-add").href = j.line_url;
+    $("ln-result").hidden = false;
+    let left = j.expires_in;
+    clearInterval(timer);
+    const tick = () => {
+      if (left <= 0) {
+        clearInterval(timer);
+        $("ln-code").textContent = "已過期";
+        $("ln-left").textContent = "0:00";
+        return;
+      }
+      $("ln-left").textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`;
+      left -= 1;
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+  } catch {
+    say("網路有問題，請稍後再試。");
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

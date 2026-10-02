@@ -3,6 +3,9 @@
 // 留空則全部保持隱藏，不會出現失效的按鈕。
 window.LVIT_LINE_URL = "https://lin.ee/471bsao";
 
+// 官方 LINE 直接查增值稅（line.html 綁定頁、會員中心的「綁定 LINE」）：LINE 服務上線當天才改成 true
+window.LVIT_LINE_BOT_OPEN = false;
+
 // 文章頁用：有設定網址時亮起所有 .js-line-cta 按鈕
 document.addEventListener("DOMContentLoaded", () => {
   if (!window.LVIT_LINE_URL) return;
@@ -10,4 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el.href = window.LVIT_LINE_URL;
     el.hidden = false;
   });
+  if (window.LVIT_LINE_BOT_OPEN) {
+    document.querySelectorAll(".js-line-bind").forEach((el) => { el.hidden = false; });
+  }
 });

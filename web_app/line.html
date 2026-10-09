@@ -27,6 +27,10 @@
 .ln-msg.wait { background:var(--surface-2); border:1px solid var(--border-strong); }
 .ln-steps { padding-left:1.2em; line-height:1.9; }
 .ln-small { font-size:.8rem; line-height:1.75; color:var(--ink-soft); }
+#ln-open [hidden] { display:none !important; }
+.ln-desk { display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:12px; text-align:center; }
+.ln-desk img { width:180px; height:180px; background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:6px; }
+.ln-desk .ln-go { background:#06c755; }
 </style>
 </head>
 <body>
@@ -53,7 +57,7 @@
   <ol class="ln-steps">
     <li>在這一頁登入土增稅神器會員</li>
     <li>按「產生綁定碼」，畫面會出現 6 位數字（15 分鐘內有效）</li>
-    <li>按「打開 LINE 傳送綁定碼」，在 LINE 裡按送出，就完成了</li>
+    <li>按「打開 LINE 傳送綁定碼」，在 LINE 裡按送出，就完成了（用電腦的話：拿手機掃畫面上的 QR code，或複製綁定碼貼到 LINE）</li>
   </ol>
   <p class="ln-small">⚠ 我們不會在 LINE 裡跟你要帳號或密碼；登入只在這個網頁上進行。</p>
 
@@ -75,6 +79,12 @@
       <div class="ln-code" id="ln-code">——————</div>
       <p class="ln-small" style="text-align:center;margin:0">剩下 <span id="ln-left">15:00</span> 有效</p>
       <a class="ln-line" id="ln-send" href="#" target="_blank" rel="noopener">打開 LINE 傳送綁定碼</a>
+      <div class="ln-desk" id="ln-desk" hidden>
+        <img id="ln-qr" alt="用手機 LINE 掃描，直接帶好綁定碼" hidden />
+        <p class="ln-small" id="ln-qr-tip" style="margin:0">用<strong>手機</strong>的相機或 LINE 掃這個 QR code，會直接打開土增稅神器的對話、帶好綁定碼，按送出就完成。</p>
+        <button type="button" class="ln-go" id="ln-copy">複製綁定碼</button>
+        <p class="ln-small" style="margin:0">或打開電腦版 LINE，進入「留白事務所-土增稅神器」的對話，貼上綁定碼送出。</p>
+      </div>
       <a class="ln-ghost" id="ln-add" href="#" target="_blank" rel="noopener">還沒加好友？先加土增稅神器 LINE 好友</a>
       <p class="ln-small">也可以自己在土增稅神器的 LINE 對話框輸入這 6 位數字。</p>
     </div>
@@ -108,6 +118,9 @@ const store = {
   del(k) { try { localStorage.removeItem(k); } catch {} },
 };
 let timer = null;
+// 電腦上點「打開 LINE」只會跳到 LINE 下載頁（負責人 2026-10-09）→ 電腦改給 QR code＋複製
+const isPhone = /Android|iPhone|iPad|iPod|Mobile|Line\//i.test(navigator.userAgent)
+  || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
 
 function say(text, kind = "err") {
   const m = $("ln-msg");
@@ -161,6 +174,20 @@ $("ln-switch").addEventListener("click", (e) => {
   show();
 });
 
+$("ln-copy").addEventListener("click", async () => {
+  const code = $("ln-code").textContent.trim();
+  if (!/^\d{6}$/.test(code)) return;
+  try {
+    await navigator.clipboard.writeText(code);
+    $("ln-copy").textContent = "已複製，到 LINE 貼上送出";
+  } catch {
+    const r = document.createRange();
+    r.selectNodeContents($("ln-code"));
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    $("ln-copy").textContent = "已選取，請按 Ctrl+C 複製";
+  }
+});
+
 $("ln-bind-btn").addEventListener("click", async () => {
   say("");
   const btn = $("ln-bind-btn");
@@ -180,6 +207,11 @@ $("ln-bind-btn").addEventListener("click", async () => {
     $("ln-code").textContent = j.code;
     $("ln-send").href = j.line_open;
     $("ln-add").href = j.line_url;
+    $("ln-send").hidden = !isPhone;
+    $("ln-desk").hidden = isPhone;
+    $("ln-qr").hidden = $("ln-qr-tip").hidden = !j.qr;
+    if (j.qr) $("ln-qr").src = j.qr;
+    $("ln-copy").textContent = "複製綁定碼";
     $("ln-result").hidden = false;
     let left = j.expires_in;
     clearInterval(timer);
@@ -188,6 +220,7 @@ $("ln-bind-btn").addEventListener("click", async () => {
         clearInterval(timer);
         $("ln-code").textContent = "已過期";
         $("ln-left").textContent = "0:00";
+        $("ln-qr").hidden = $("ln-qr-tip").hidden = true;
         return;
       }
       $("ln-left").textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`;

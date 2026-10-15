@@ -981,6 +981,110 @@ function initLookupUI() {
     });
   });
 
+  // ── 直接輸入地址：伺服器查「門牌 → 建號 → 建物坐落地號」，這裡把結果帶進下面的地段、地號欄位 ──
+  // 查地號本身還是使用者按「查詢並帶入」才查（扣他自己的點數）；地址找地號這步不扣會員點數。
+  const addrRow = $("#lk-addr-row");
+  const addrBox = $("#addr-result");
+  const showAddr = (html) => { addrBox.innerHTML = html; addrBox.hidden = !html; };
+  const sameName = (a, b) => String(a || "").replace(/臺/g, "台") === String(b || "").replace(/臺/g, "台");
+  let addrSeq = 0;                                   // 連查兩個地址：只認最後一次，慢回來的舊結果不蓋掉新的
+
+  const applyParcel = async (p, head, seq) => {
+    const errEl = $("#lookup-error");
+    citySel.value = p.city;
+    fillTowns({ skipSections: true });
+    const town = Object.entries(TOWNS[p.city] || {}).find(([, name]) => sameName(name, p.town));
+    if (!town) {
+      errEl.textContent = t(state.lang, "lookup.addr.fail");
+      errEl.hidden = false;
+      return;
+    }
+    townSel.value = town[0];
+    filterInput.value = "";
+    await autoLoadSections();
+    if (seq !== addrSeq) return;
+    const idx = (state.sections || []).findIndex((s) => s.SEC === p.sec_code && s.UNIT === p.unit);
+    if (idx < 0) {
+      errEl.textContent = t(state.lang, "lookup.addr.fail");
+      errEl.hidden = false;
+      return;
+    }
+    applySectionFilter();
+    sectionSel.value = String(idx);
+    $("#lk-no1").value = p.no.slice(0, 4);
+    $("#lk-no2").value = p.no.slice(4, 8);
+    showAddr(head + `<p>${t(state.lang, "lookup.addr.filled", { sec: escapeHtml(p.section), no: escapeHtml(p.number_label) })}</p>`);
+  };
+
+  const findByAddress = async (pick) => {
+    const errEl = $("#lookup-error");
+    errEl.hidden = true;
+    if (!state.token) {
+      errEl.textContent = t(state.lang, "lookup.needLogin");
+      errEl.hidden = false;
+      $("#login-dialog").showModal();
+      return;
+    }
+    const text = $("#lk-addr").value.trim();
+    if (!text) return;
+    const seq = ++addrSeq;
+    const btn = $("#btn-addr");
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = t(state.lang, "lookup.addr.searching");
+    try {
+      const r = await fetch("/line/api/address", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: state.token, address: text, pick: pick || null }),
+      });
+      const j = await r.json().catch(() => null);
+      if (seq !== addrSeq) return;
+      if (!j || !j.ok) {
+        showAddr("");
+        errEl.textContent = (j && j.error) || t(state.lang, "lookup.addr.fail");
+        errEl.hidden = false;
+        return;
+      }
+      if (j.status === "choose") {
+        showAddr(`<p>${t(state.lang, "lookup.addr.pickUnit")}</p>` + j.choices
+          .map((c) => `<button type="button" class="addr-pick" data-pick="${escapeHtml(c.build_no)}">${escapeHtml(c.door)}</button>`)
+          .join(""));
+        addrBox.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => findByAddress(b.dataset.pick)));
+        return;
+      }
+      const b = j.building || {};
+      const head = `<p class="addr-door">${escapeHtml(j.county + j.town + (b.door || ""))}（建號 ${escapeHtml(b.label || "")}）</p>`;
+      const parcels = j.parcels || [];
+      if (parcels.length === 1) {
+        await applyParcel(parcels[0], head, seq);
+        return;
+      }
+      showAddr(head + `<p>${t(state.lang, "lookup.addr.pickParcel")}</p>` + parcels
+        .map((p, i) => `<button type="button" class="addr-pick" data-parcel="${i}">${escapeHtml(p.section)} ${escapeHtml(p.number_label)} 地號</button>`)
+        .join(""));
+      addrBox.querySelectorAll("[data-parcel]").forEach((el) =>
+        el.addEventListener("click", () => applyParcel(parcels[Number(el.dataset.parcel)], head, ++addrSeq)));
+    } catch {
+      errEl.textContent = t(state.lang, "lookup.addr.fail");
+      errEl.hidden = false;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = orig;
+    }
+  };
+
+  if (addrRow && window.LVIT_ADDRESS_OPEN) {
+    addrRow.hidden = false;
+    $("#btn-addr").addEventListener("click", () => findByAddress());
+    $("#lk-addr").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        findByAddress();
+      }
+    });
+  }
+
   // 只填縣市/鄉鎮下拉（純本機資料，不打 API）
   fillTowns({ skipSections: true });
 

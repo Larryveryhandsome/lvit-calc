@@ -1350,3 +1350,14 @@ select,
 textarea {
   font-size: 16px;
 }
+
+/* 地號查詢：直接輸入地址 */
+.addr-row .field { flex: 1 1 100%; }
+.addr-input { display: flex; gap: 8px; flex-wrap: wrap; }
+.addr-input input { flex: 1 1 220px; min-width: 0; }
+.addr-result { margin-top: 8px; font-size: .9rem; line-height: 1.7; }
+.addr-result p { margin: 0 0 6px; }
+.addr-result .addr-door { font-weight: 700; }
+.addr-pick { margin: 4px 6px 0 0; padding: 6px 12px; border: 1px solid var(--border-strong); border-radius: 999px;
+  background: var(--surface); color: inherit; font: inherit; cursor: pointer; }
+.addr-pick:hover { border-color: currentColor; }
